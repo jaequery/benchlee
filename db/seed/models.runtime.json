@@ -1,0 +1,35 @@
+{
+  "$comment": [
+    "Maps a Benchlee catalog model slug (db/seed/catalog.json) to the concrete API",
+    "model id scripts/run-benchmark.mjs should call, plus pricing so cost_usd can be",
+    "computed from real token counts.",
+    "",
+    "These ids are EXAMPLES. Set them to model ids your account actually has, and",
+    "check current pricing with your provider — the numbers below are placeholders",
+    "and will be wrong the moment prices change. A model with no entry here, or with",
+    "no API key in the environment, is skipped rather than faked.",
+    "",
+    "usd_per_mtok_in / usd_per_mtok_out are US dollars per 1,000,000 tokens."
+  ],
+  "claude-opus-5": {
+    "provider": "anthropic",
+    "api_model": "claude-opus-4-20250514",
+    "usd_per_mtok_in": 15.0,
+    "usd_per_mtok_out": 75.0,
+    "temperature": 1.0
+  },
+  "gpt-5-2": {
+    "provider": "openai",
+    "api_model": "gpt-4o",
+    "usd_per_mtok_in": 2.5,
+    "usd_per_mtok_out": 10.0,
+    "temperature": 1.0
+  },
+  "gemini-3-pro": {
+    "provider": "google",
+    "api_model": "gemini-2.5-pro",
+    "usd_per_mtok_in": 1.25,
+    "usd_per_mtok_out": 10.0,
+    "temperature": 1.0
+  }
+}

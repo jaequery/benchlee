@@ -1,0 +1,54 @@
+name: benchlee
+
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: benchlee
+      POSTGRES_PASSWORD: benchlee
+      POSTGRES_DB: benchlee
+    ports:
+      - "${BENCHLEE_DB_PORT:-5432}:5432"
+    volumes:
+      - benchlee-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U benchlee -d benchlee"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://benchlee:benchlee@db:5432/benchlee
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+      BENCHLEE_AUTO_SEED: ${BENCHLEE_AUTO_SEED:-1}
+      NODE_ENV: production
+    ports:
+      - "${BENCHLEE_WEB_PORT:-3000}:3000"
+    volumes:
+      - benchlee-artifacts:/app/storage
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+
+volumes:
+  benchlee-db:
+  benchlee-artifacts:

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing — Simple, transparent plans</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    min-height: 100vh;
+    padding: 72px 24px;
+  }
+  .hero {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 56px;
+  }
+  .hero h1 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(90deg, #58a6ff 0%, #bc8cff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 16px;
+  }
+  .hero p { color: #8b949e; font-size: 18px; line-height: 1.6; }
+
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .plan {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .plan.recommended {
+    border-color: #58a6ff;
+    transform: translateY(-8px);
+  }
+  .badge {
+    position: absolute;
+    top: -12px;
+    right: 24px;
+    background: #58a6ff;
+    color: #0d1117;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 5px 10px;
+    border-radius: 6px;
+  }
+  .plan h2 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+  .plan .desc { color: #8b949e; font-size: 14px; margin-bottom: 24px; min-height: 42px; }
+  .amount { font-size: 40px; font-weight: 700; letter-spacing: -0.03em; }
+  .period { color: #8b949e; font-size: 15px; }
+  .divider { height: 1px; background: #30363d; margin: 24px 0; }
+  ul { list-style: none; display: grid; gap: 12px; margin-bottom: 32px; }
+  li { font-size: 14px; color: #c9d1d9; padding-left: 24px; position: relative; }
+  li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #3fb950;
+    font-weight: 700;
+  }
+  a.cta {
+    margin-top: auto;
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    background: #21262d;
+    color: #e6edf3;
+    border: 1px solid #30363d;
+  }
+  a.cta:hover { background: #30363d; }
+  a.cta.primary { background: #238636; border-color: #238636; color: #fff; }
+  a.cta.primary:hover { background: #2ea043; }
+  .fine { text-align: center; color: #6e7681; font-size: 13px; margin-top: 48px; }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <h1>Simple, transparent pricing</h1>
+    <p>Pick a plan that fits today. Upgrade, downgrade or cancel whenever you want.</p>
+  </div>
+
+  <div class="plans">
+    <div class="plan">
+      <h2>Solo</h2>
+      <p class="desc">For individuals kicking the tyres on a new idea.</p>
+      <div><span class="amount">$0</span> <span class="period">/ forever</span></div>
+      <div class="divider"></div>
+      <ul>
+        <li>1 project</li>
+        <li>10,000 events per month</li>
+        <li>7-day data retention</li>
+        <li>Community support</li>
+      </ul>
+      <a class="cta" href="#">Get started free</a>
+    </div>
+
+    <div class="plan recommended">
+      <span class="badge">Recommended</span>
+      <h2>Studio</h2>
+      <p class="desc">For small teams shipping to real users every week.</p>
+      <div><span class="amount">$24</span> <span class="period">/ month</span></div>
+      <div class="divider"></div>
+      <ul>
+        <li>10 projects</li>
+        <li>1,000,000 events per month</li>
+        <li>90-day data retention</li>
+        <li>5 team seats included</li>
+        <li>Email support</li>
+      </ul>
+      <a class="cta primary" href="#">Start free trial</a>
+    </div>
+
+    <div class="plan">
+      <h2>Scale</h2>
+      <p class="desc">For companies where an outage becomes a meeting.</p>
+      <div><span class="amount">$96</span> <span class="period">/ month</span></div>
+      <div class="divider"></div>
+      <ul>
+        <li>Unlimited projects</li>
+        <li>25,000,000 events per month</li>
+        <li>2-year data retention</li>
+        <li>Unlimited seats, SAML SSO</li>
+        <li>99.9% uptime SLA</li>
+      </ul>
+      <a class="cta" href="#">Contact sales</a>
+    </div>
+  </div>
+
+  <p class="fine">All prices in USD, excluding tax. Cancel at any time from your dashboard.</p>
+</body>
+</html>

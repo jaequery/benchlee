@@ -1,0 +1,498 @@
+{
+  "$comment": [
+    "Benchlee demo dataset. Every run below is seeded with provenance='demo' and is",
+    "rendered in the UI behind a 'Demo dataset' badge. The artifacts are hand-authored",
+    "fixtures that exist to exercise the product surface — they are NOT transcripts of",
+    "real API calls, and the site says so on every page.",
+    "To publish real results, run `pnpm bench:run` with provider API keys set; that",
+    "writes rows with provenance='live', which render without the demo badge.",
+    "This file is meant to be edited: add a model here, drop matching artifact files",
+    "under db/seed/artifacts/<task-slug>/<model-slug>.html, re-run `pnpm db:seed`."
+  ],
+  "models": [
+    {
+      "slug": "claude-opus-5",
+      "name": "Claude Opus 5",
+      "vendor": "Anthropic",
+      "badge": "O5",
+      "accent_hex": "#d97757",
+      "context_window": 200000,
+      "homepage_url": "https://www.anthropic.com/claude",
+      "notes": "Anthropic's frontier reasoning model.",
+      "position": 1
+    },
+    {
+      "slug": "gpt-5-2",
+      "name": "GPT-5.2",
+      "vendor": "OpenAI",
+      "badge": "5.2",
+      "accent_hex": "#10a37f",
+      "context_window": 400000,
+      "homepage_url": "https://openai.com",
+      "notes": "OpenAI's flagship general-purpose model.",
+      "position": 2
+    },
+    {
+      "slug": "gemini-3-pro",
+      "name": "Gemini 3 Pro",
+      "vendor": "Google DeepMind",
+      "badge": "G3",
+      "accent_hex": "#4285f4",
+      "context_window": 1000000,
+      "homepage_url": "https://deepmind.google/technologies/gemini/",
+      "notes": "Long-context multimodal model from Google DeepMind.",
+      "position": 3
+    },
+    {
+      "slug": "llama-4-maverick",
+      "name": "Llama 4 Maverick",
+      "vendor": "Meta",
+      "badge": "L4",
+      "accent_hex": "#7b61ff",
+      "context_window": 128000,
+      "homepage_url": "https://ai.meta.com/llama/",
+      "notes": "Open-weights mixture-of-experts model.",
+      "position": 4
+    },
+    {
+      "slug": "deepseek-v4",
+      "name": "DeepSeek V4",
+      "vendor": "DeepSeek",
+      "badge": "V4",
+      "accent_hex": "#3b82f6",
+      "context_window": 128000,
+      "homepage_url": "https://www.deepseek.com",
+      "notes": "Cost-efficient open-weights model.",
+      "position": 5
+    }
+  ],
+  "tasks": [
+    {
+      "slug": "saas-pricing",
+      "title": "The Pricing Page",
+      "category": "interface",
+      "summary": "Three tiers, one page, no framework. The task every model claims to ace and most quietly botch.",
+      "why_it_matters": "A pricing page is a taste test disguised as a layout exercise. Spacing, hierarchy, and the courage to make one tier louder than the others are all visible in two seconds — and none of it shows up in a numeric score.",
+      "prompt": "Write a single self-contained HTML file for a SaaS pricing page. Three tiers: Solo ($0), Studio ($24/mo), Scale ($96/mo). Dark theme. No external CSS, no JS frameworks, no images, no network requests. Highlight the middle tier as the recommended plan. It must look finished.",
+      "rubric": [
+        { "key": "hierarchy", "label": "Visual hierarchy" },
+        { "key": "fidelity", "label": "Spec fidelity" },
+        { "key": "polish", "label": "Finish & polish" },
+        { "key": "restraint", "label": "Restraint" }
+      ],
+      "render_mode": "html",
+      "viewport_w": 1280,
+      "viewport_h": 860,
+      "position": 1
+    },
+    {
+      "slug": "revenue-chart",
+      "title": "The Chart, By Hand",
+      "category": "dataviz",
+      "summary": "Given eight numbers, draw an honest chart in raw SVG. No chart library to hide behind.",
+      "why_it_matters": "Charting libraries paper over whether a model understands scale, baselines and label collision. Hand-rolled SVG does not. This is where you see if the model can do arithmetic and design at the same time.",
+      "prompt": "Write a single self-contained HTML file containing a hand-authored inline SVG chart of quarterly revenue: 2024 Q1 1.2, Q2 1.9, Q3 2.4, Q4 3.1, 2025 Q1 3.0, Q2 4.4, Q3 5.1, Q4 6.8 (millions USD). Bars for each quarter plus a line showing the trend. Include axis labels, gridlines and a title. No libraries, no external requests.",
+      "rubric": [
+        { "key": "accuracy", "label": "Data accuracy" },
+        { "key": "legibility", "label": "Legibility" },
+        { "key": "fidelity", "label": "Spec fidelity" },
+        { "key": "polish", "label": "Finish & polish" }
+      ],
+      "render_mode": "html",
+      "viewport_w": 1280,
+      "viewport_h": 760,
+      "position": 2
+    },
+    {
+      "slug": "css-clock",
+      "title": "No-JavaScript Clock",
+      "category": "motion",
+      "summary": "An analog clock whose hands actually move, with the JavaScript escape hatch nailed shut.",
+      "why_it_matters": "Take away the obvious tool and you find out whether a model reasons about a medium or pattern-matches on it. Correct CSS animation timing (60s, 3600s, 43200s) is a fact you can verify by watching it.",
+      "prompt": "Write a single self-contained HTML file showing an analog clock face with hour, minute and second hands that animate continuously using CSS only. No JavaScript at all. The second hand must sweep once per minute, the minute hand once per hour, the hour hand once per twelve hours. Include the twelve hour markers.",
+      "rubric": [
+        { "key": "correctness", "label": "Animation correctness" },
+        { "key": "constraint", "label": "Constraint respected" },
+        { "key": "polish", "label": "Finish & polish" },
+        { "key": "restraint", "label": "Restraint" }
+      ],
+      "render_mode": "html",
+      "viewport_w": 1000,
+      "viewport_h": 760,
+      "position": 3
+    },
+    {
+      "slug": "error-404",
+      "title": "404 With A Personality",
+      "category": "craft",
+      "summary": "An open brief with one hard rule: be memorable without being annoying.",
+      "why_it_matters": "Open briefs separate models with taste from models with a template. There is no right answer here, which is exactly why a leaderboard number can't settle it and two artifacts side by side can.",
+      "prompt": "Write a single self-contained HTML file for a 404 page with genuine personality. Dark theme, one clear route back to the homepage. Be memorable but not obnoxious — no autoplay, no flashing, nothing that would annoy a user who is already lost. No external assets.",
+      "rubric": [
+        { "key": "originality", "label": "Originality" },
+        { "key": "usability", "label": "Still usable" },
+        { "key": "polish", "label": "Finish & polish" },
+        { "key": "restraint", "label": "Restraint" }
+      ],
+      "render_mode": "html",
+      "viewport_w": 1100,
+      "viewport_h": 760,
+      "position": 4
+    }
+  ],
+  "runs": [
+    {
+      "task": "saas-pricing",
+      "model": "claude-opus-5",
+      "latency_ms": 18420,
+      "input_tokens": 118,
+      "output_tokens": 2140,
+      "cost_usd": 0.0334,
+      "temperature": 1.0,
+      "artifact_title": "pricing.html",
+      "scores": [
+        { "dimension": "hierarchy", "value": 9.0, "rationale": "Recommended tier is scaled up and outlined; the eye lands on it first." },
+        { "dimension": "fidelity", "value": 10.0, "rationale": "All three tiers, correct prices, single file, zero external requests." },
+        { "dimension": "polish", "value": 9.0, "rationale": "Consistent 8px rhythm, real hover states, footnote row." },
+        { "dimension": "restraint", "value": 8.5, "rationale": "One accent colour, no gradient soup." }
+      ]
+    },
+    {
+      "task": "saas-pricing",
+      "model": "gpt-5-2",
+      "latency_ms": 12180,
+      "input_tokens": 118,
+      "output_tokens": 1760,
+      "cost_usd": 0.0211,
+      "temperature": 1.0,
+      "artifact_title": "pricing.html",
+      "scores": [
+        { "dimension": "hierarchy", "value": 8.0, "rationale": "Middle tier badged and lifted, though all three cards share a weight." },
+        { "dimension": "fidelity", "value": 10.0, "rationale": "Spec met exactly." },
+        { "dimension": "polish", "value": 8.5, "rationale": "Clean grid, tidy feature lists, slightly generic buttons." },
+        { "dimension": "restraint", "value": 8.0, "rationale": "Restrained palette; the gradient header is the one indulgence." }
+      ]
+    },
+    {
+      "task": "saas-pricing",
+      "model": "gemini-3-pro",
+      "latency_ms": 9640,
+      "input_tokens": 118,
+      "output_tokens": 1980,
+      "cost_usd": 0.0142,
+      "temperature": 1.0,
+      "artifact_title": "pricing.html",
+      "scores": [
+        { "dimension": "hierarchy", "value": 7.0, "rationale": "Recommended tier marked with a ribbon but not scaled — weaker first read." },
+        { "dimension": "fidelity", "value": 10.0, "rationale": "Prices and tiers correct, self-contained." },
+        { "dimension": "polish", "value": 8.0, "rationale": "Good typography, uneven card padding at the footer." },
+        { "dimension": "restraint", "value": 6.5, "rationale": "Two accent hues plus a glow; busier than the brief asked for." }
+      ]
+    },
+    {
+      "task": "saas-pricing",
+      "model": "llama-4-maverick",
+      "latency_ms": 7310,
+      "input_tokens": 118,
+      "output_tokens": 1180,
+      "cost_usd": 0.0031,
+      "temperature": 1.0,
+      "artifact_title": "pricing.html",
+      "scores": [
+        { "dimension": "hierarchy", "value": 5.5, "rationale": "All three cards identical; 'recommended' is a text label only." },
+        { "dimension": "fidelity", "value": 9.0, "rationale": "Correct tiers and prices, but the highlight requirement is barely met." },
+        { "dimension": "polish", "value": 5.0, "rationale": "Default-ish spacing, no hover states, cards bottom-ragged." },
+        { "dimension": "restraint", "value": 8.0, "rationale": "Plain by default rather than by choice." }
+      ]
+    },
+    {
+      "task": "saas-pricing",
+      "model": "deepseek-v4",
+      "latency_ms": 8890,
+      "input_tokens": 118,
+      "output_tokens": 1520,
+      "cost_usd": 0.0018,
+      "temperature": 1.0,
+      "artifact_title": "pricing.html",
+      "scores": [
+        { "dimension": "hierarchy", "value": 7.5, "rationale": "Middle tier is border-highlighted and slightly taller." },
+        { "dimension": "fidelity", "value": 10.0, "rationale": "Everything asked for is present." },
+        { "dimension": "polish", "value": 7.0, "rationale": "Solid structure; the feature check glyphs sit a hair off-baseline." },
+        { "dimension": "restraint", "value": 8.5, "rationale": "Disciplined single-accent palette." }
+      ]
+    },
+
+    {
+      "task": "revenue-chart",
+      "model": "claude-opus-5",
+      "latency_ms": 21050,
+      "input_tokens": 152,
+      "output_tokens": 2380,
+      "cost_usd": 0.0371,
+      "temperature": 1.0,
+      "artifact_title": "chart.html",
+      "scores": [
+        { "dimension": "accuracy", "value": 10.0, "rationale": "All eight values plot to the correct height against a 0-baseline." },
+        { "dimension": "legibility", "value": 9.5, "rationale": "Year bands, gridlines behind bars, no label collisions." },
+        { "dimension": "fidelity", "value": 10.0, "rationale": "Bars, trend line, axes, gridlines and title all present." },
+        { "dimension": "polish", "value": 9.0, "rationale": "Value labels on hover-free static render; tasteful axis weight." }
+      ]
+    },
+    {
+      "task": "revenue-chart",
+      "model": "gpt-5-2",
+      "latency_ms": 14730,
+      "input_tokens": 152,
+      "output_tokens": 1920,
+      "cost_usd": 0.0230,
+      "temperature": 1.0,
+      "artifact_title": "chart.html",
+      "scores": [
+        { "dimension": "accuracy", "value": 9.5, "rationale": "Correct scaling; the trend line uses bar centres as anchors." },
+        { "dimension": "legibility", "value": 8.5, "rationale": "Readable, though the y-axis unit only appears in the title." },
+        { "dimension": "fidelity", "value": 10.0, "rationale": "Every requested element is there." },
+        { "dimension": "polish", "value": 8.5, "rationale": "Clean, slightly plain; legend is well handled." }
+      ]
+    },
+    {
+      "task": "revenue-chart",
+      "model": "gemini-3-pro",
+      "latency_ms": 11260,
+      "input_tokens": 152,
+      "output_tokens": 2110,
+      "cost_usd": 0.0151,
+      "temperature": 1.0,
+      "artifact_title": "chart.html",
+      "scores": [
+        { "dimension": "accuracy", "value": 9.0, "rationale": "Heights correct; the 2025 Q1 dip is visible rather than smoothed away." },
+        { "dimension": "legibility", "value": 9.0, "rationale": "Strong labelling, generous tick spacing." },
+        { "dimension": "fidelity", "value": 10.0, "rationale": "Bars plus line plus axes plus gridlines plus title." },
+        { "dimension": "polish", "value": 8.0, "rationale": "Handsome, but the drop shadow on bars fights the gridlines." }
+      ]
+    },
+    {
+      "task": "revenue-chart",
+      "model": "llama-4-maverick",
+      "latency_ms": 8020,
+      "input_tokens": 152,
+      "output_tokens": 1240,
+      "cost_usd": 0.0033,
+      "temperature": 1.0,
+      "artifact_title": "chart.html",
+      "scores": [
+        { "dimension": "accuracy", "value": 6.0, "rationale": "Bars are evenly stepped rather than proportional — 2025 Q1's dip disappears." },
+        { "dimension": "legibility", "value": 6.5, "rationale": "Axis labels present but crowd each other at the left edge." },
+        { "dimension": "fidelity", "value": 7.0, "rationale": "Gridlines omitted; the trend line is a straight diagonal." },
+        { "dimension": "polish", "value": 5.5, "rationale": "Functional, unfinished." }
+      ]
+    },
+    {
+      "task": "revenue-chart",
+      "model": "deepseek-v4",
+      "latency_ms": 10480,
+      "input_tokens": 152,
+      "output_tokens": 1690,
+      "cost_usd": 0.0020,
+      "temperature": 1.0,
+      "artifact_title": "chart.html",
+      "scores": [
+        { "dimension": "accuracy", "value": 9.5, "rationale": "Values plot correctly with a true zero baseline." },
+        { "dimension": "legibility", "value": 8.0, "rationale": "Clear, though the trend-line colour sits close to the bar fill." },
+        { "dimension": "fidelity", "value": 10.0, "rationale": "All required elements present." },
+        { "dimension": "polish", "value": 7.5, "rationale": "Neat and plain; no wasted marks." }
+      ]
+    },
+
+    {
+      "task": "css-clock",
+      "model": "claude-opus-5",
+      "latency_ms": 16890,
+      "input_tokens": 108,
+      "output_tokens": 1840,
+      "cost_usd": 0.0289,
+      "temperature": 1.0,
+      "artifact_title": "clock.html",
+      "scores": [
+        { "dimension": "correctness", "value": 10.0, "rationale": "60s / 3600s / 43200s durations, all linear, all infinite." },
+        { "dimension": "constraint", "value": 10.0, "rationale": "Zero script tags." },
+        { "dimension": "polish", "value": 9.5, "rationale": "Twelve markers, a counterweight on the second hand, a centre pin." },
+        { "dimension": "restraint", "value": 9.0, "rationale": "Monochrome face, one red accent." }
+      ]
+    },
+    {
+      "task": "css-clock",
+      "model": "gpt-5-2",
+      "latency_ms": 11940,
+      "input_tokens": 108,
+      "output_tokens": 1420,
+      "cost_usd": 0.0173,
+      "temperature": 1.0,
+      "artifact_title": "clock.html",
+      "scores": [
+        { "dimension": "correctness", "value": 10.0, "rationale": "Durations correct; steps() used deliberately on the second hand." },
+        { "dimension": "constraint", "value": 10.0, "rationale": "CSS only." },
+        { "dimension": "polish", "value": 8.5, "rationale": "Clean face, hour markers generated with nth-child rotations." },
+        { "dimension": "restraint", "value": 9.0, "rationale": "No ornament that isn't a clock part." }
+      ]
+    },
+    {
+      "task": "css-clock",
+      "model": "gemini-3-pro",
+      "latency_ms": 9180,
+      "input_tokens": 108,
+      "output_tokens": 1610,
+      "cost_usd": 0.0122,
+      "temperature": 1.0,
+      "artifact_title": "clock.html",
+      "scores": [
+        { "dimension": "correctness", "value": 9.0, "rationale": "Correct durations, though the hour hand starts at 12 rather than a real time." },
+        { "dimension": "constraint", "value": 10.0, "rationale": "No JavaScript." },
+        { "dimension": "polish", "value": 9.0, "rationale": "Numerals as well as markers; nicely weighted hands." },
+        { "dimension": "restraint", "value": 7.5, "rationale": "The animated glow ring is extra." }
+      ]
+    },
+    {
+      "task": "css-clock",
+      "model": "llama-4-maverick",
+      "latency_ms": 6740,
+      "input_tokens": 108,
+      "output_tokens": 940,
+      "cost_usd": 0.0026,
+      "temperature": 1.0,
+      "artifact_title": "clock.html",
+      "scores": [
+        { "dimension": "correctness", "value": 4.0, "rationale": "Minute hand animates in 60s and the hour hand in 3600s — the clock runs 60x fast." },
+        { "dimension": "constraint", "value": 10.0, "rationale": "No JavaScript, at least." },
+        { "dimension": "polish", "value": 5.0, "rationale": "Four markers instead of twelve." },
+        { "dimension": "restraint", "value": 7.0, "rationale": "Plain." }
+      ]
+    },
+    {
+      "task": "css-clock",
+      "model": "deepseek-v4",
+      "latency_ms": 9910,
+      "input_tokens": 108,
+      "output_tokens": 1380,
+      "cost_usd": 0.0016,
+      "temperature": 1.0,
+      "artifact_title": "clock.html",
+      "scores": [
+        { "dimension": "correctness", "value": 10.0, "rationale": "All three durations correct." },
+        { "dimension": "constraint", "value": 10.0, "rationale": "CSS only." },
+        { "dimension": "polish", "value": 7.5, "rationale": "Twelve markers present; hands are a touch thin at the pivot." },
+        { "dimension": "restraint", "value": 9.0, "rationale": "Nothing superfluous." }
+      ]
+    },
+
+    {
+      "task": "error-404",
+      "model": "claude-opus-5",
+      "latency_ms": 15320,
+      "input_tokens": 96,
+      "output_tokens": 1560,
+      "cost_usd": 0.0245,
+      "temperature": 1.0,
+      "artifact_title": "404.html",
+      "scores": [
+        { "dimension": "originality", "value": 9.0, "rationale": "Treats the 404 as a lost-and-found receipt — a shape nobody else reached for." },
+        { "dimension": "usability", "value": 10.0, "rationale": "The home link is the largest interactive target on the page." },
+        { "dimension": "polish", "value": 9.0, "rationale": "Perforated edge, monospace ticket numbering, consistent rhythm." },
+        { "dimension": "restraint", "value": 9.0, "rationale": "One idea, executed; no animation for its own sake." }
+      ]
+    },
+    {
+      "task": "error-404",
+      "model": "gpt-5-2",
+      "latency_ms": 10870,
+      "input_tokens": 96,
+      "output_tokens": 1290,
+      "cost_usd": 0.0156,
+      "temperature": 1.0,
+      "artifact_title": "404.html",
+      "scores": [
+        { "dimension": "originality", "value": 7.0, "rationale": "Terminal window with a fake stack trace — well made, but a familiar joke." },
+        { "dimension": "usability", "value": 9.0, "rationale": "Clear primary action, though styled as a prompt line." },
+        { "dimension": "polish", "value": 9.0, "rationale": "Convincing chrome, blinking cursor stays subtle." },
+        { "dimension": "restraint", "value": 8.5, "rationale": "Resisted making the cursor loud." }
+      ]
+    },
+    {
+      "task": "error-404",
+      "model": "gemini-3-pro",
+      "latency_ms": 8450,
+      "input_tokens": 96,
+      "output_tokens": 1480,
+      "cost_usd": 0.0106,
+      "temperature": 1.0,
+      "artifact_title": "404.html",
+      "scores": [
+        { "dimension": "originality", "value": 8.0, "rationale": "A star map with the page marked 'signal lost' — a genuinely nice frame." },
+        { "dimension": "usability", "value": 8.0, "rationale": "Home link is clear but sits low on the page." },
+        { "dimension": "polish", "value": 8.5, "rationale": "Pure-CSS starfield reads well at any size." },
+        { "dimension": "restraint", "value": 6.5, "rationale": "The drifting parallax edges toward the 'annoying' line the brief drew." }
+      ]
+    },
+    {
+      "task": "error-404",
+      "model": "llama-4-maverick",
+      "latency_ms": 5980,
+      "input_tokens": 96,
+      "output_tokens": 720,
+      "cost_usd": 0.0019,
+      "temperature": 1.0,
+      "artifact_title": "404.html",
+      "scores": [
+        { "dimension": "originality", "value": 3.5, "rationale": "Big '404', 'Page Not Found', a link. The template." },
+        { "dimension": "usability", "value": 9.0, "rationale": "Impossible to misuse, in fairness." },
+        { "dimension": "polish", "value": 5.0, "rationale": "Centred stack, default font, no considered spacing." },
+        { "dimension": "restraint", "value": 9.5, "rationale": "Maximum restraint, minimum personality — the brief asked for both." }
+      ]
+    },
+    {
+      "task": "error-404",
+      "model": "deepseek-v4",
+      "latency_ms": 8620,
+      "input_tokens": 96,
+      "output_tokens": 1340,
+      "cost_usd": 0.0015,
+      "temperature": 1.0,
+      "artifact_title": "404.html",
+      "scores": [
+        { "dimension": "originality", "value": 7.5, "rationale": "Frames the missing page as a museum placard for a stolen exhibit." },
+        { "dimension": "usability", "value": 9.5, "rationale": "Single obvious button, high contrast." },
+        { "dimension": "polish", "value": 8.0, "rationale": "Serif/mono pairing carries the concept; frame corners are slightly heavy." },
+        { "dimension": "restraint", "value": 9.0, "rationale": "Static, quiet, confident." }
+      ]
+    }
+  ],
+  "editorial_ballots": [
+    { "task": "saas-pricing", "winner": "claude-opus-5", "loser": "llama-4-maverick", "count": 9 },
+    { "task": "saas-pricing", "winner": "claude-opus-5", "loser": "gemini-3-pro", "count": 5 },
+    { "task": "saas-pricing", "winner": "gpt-5-2", "loser": "llama-4-maverick", "count": 8 },
+    { "task": "saas-pricing", "winner": "gpt-5-2", "loser": "deepseek-v4", "count": 4 },
+    { "task": "saas-pricing", "winner": "deepseek-v4", "loser": "llama-4-maverick", "count": 6 },
+    { "task": "saas-pricing", "winner": "gemini-3-pro", "loser": "llama-4-maverick", "count": 7 },
+    { "task": "saas-pricing", "winner": "claude-opus-5", "loser": "gpt-5-2", "count": 3 },
+
+    { "task": "revenue-chart", "winner": "claude-opus-5", "loser": "llama-4-maverick", "count": 10 },
+    { "task": "revenue-chart", "winner": "deepseek-v4", "loser": "llama-4-maverick", "count": 8 },
+    { "task": "revenue-chart", "winner": "gemini-3-pro", "loser": "llama-4-maverick", "count": 9 },
+    { "task": "revenue-chart", "winner": "gpt-5-2", "loser": "llama-4-maverick", "count": 8 },
+    { "task": "revenue-chart", "winner": "claude-opus-5", "loser": "deepseek-v4", "count": 4 },
+    { "task": "revenue-chart", "winner": "gemini-3-pro", "loser": "gpt-5-2", "count": 3 },
+
+    { "task": "css-clock", "winner": "claude-opus-5", "loser": "llama-4-maverick", "count": 11 },
+    { "task": "css-clock", "winner": "gpt-5-2", "loser": "llama-4-maverick", "count": 10 },
+    { "task": "css-clock", "winner": "deepseek-v4", "loser": "llama-4-maverick", "count": 9 },
+    { "task": "css-clock", "winner": "gemini-3-pro", "loser": "llama-4-maverick", "count": 9 },
+    { "task": "css-clock", "winner": "claude-opus-5", "loser": "gemini-3-pro", "count": 4 },
+    { "task": "css-clock", "winner": "gpt-5-2", "loser": "deepseek-v4", "count": 3 },
+
+    { "task": "error-404", "winner": "claude-opus-5", "loser": "llama-4-maverick", "count": 12 },
+    { "task": "error-404", "winner": "gemini-3-pro", "loser": "llama-4-maverick", "count": 9 },
+    { "task": "error-404", "winner": "deepseek-v4", "loser": "llama-4-maverick", "count": 8 },
+    { "task": "error-404", "winner": "gpt-5-2", "loser": "llama-4-maverick", "count": 8 },
+    { "task": "error-404", "winner": "claude-opus-5", "loser": "gpt-5-2", "count": 5 },
+    { "task": "error-404", "winner": "gemini-3-pro", "loser": "deepseek-v4", "count": 2 }
+  ]
+}

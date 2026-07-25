@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quarterly Revenue, 2024–2025</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #fbfbfa;
+    color: #1c1c1a;
+    font: 400 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 48px 32px;
+    display: flex;
+    justify-content: center;
+  }
+  figure { width: 100%; max-width: 1180px; }
+  figcaption { margin-bottom: 4px; }
+  h1 { font-size: 22px; font-weight: 620; letter-spacing: -.015em; }
+  .sub { color: #6b6b66; font-size: 14px; margin-top: 4px; }
+  .legend { display: flex; gap: 20px; margin: 16px 0 8px; font-size: 13px; color: #57574f; }
+  .key { display: inline-flex; align-items: center; gap: 7px; }
+  .swatch { width: 12px; height: 12px; border-radius: 2px; background: #2f6f5b; }
+  .swatch.line { height: 3px; border-radius: 2px; background: #d1652b; }
+  svg { display: block; width: 100%; height: auto; }
+  .grid { stroke: #e4e3de; stroke-width: 1; }
+  .axis { stroke: #1c1c1a; stroke-width: 1.25; }
+  .tick { fill: #6b6b66; font-size: 13px; }
+  .qlabel { fill: #3d3d38; font-size: 13px; text-anchor: middle; }
+  .vlabel { fill: #2f6f5b; font-size: 12.5px; font-weight: 600; text-anchor: middle; }
+  .yearband { fill: #6b6b66; font-size: 12px; letter-spacing: .1em; text-anchor: middle; }
+  .bar { fill: #2f6f5b; }
+  .bar.dip { fill: #6b9c8b; }
+  .trend { fill: none; stroke: #d1652b; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+  .node { fill: #fbfbfa; stroke: #d1652b; stroke-width: 2.5; }
+  .axistitle { fill: #6b6b66; font-size: 12.5px; }
+</style>
+</head>
+<body>
+<figure>
+  <figcaption>
+    <h1>Quarterly revenue, 2024–2025</h1>
+    <p class="sub">Millions of USD, recognised revenue. Q1 2025 reflects the enterprise contract that slipped into Q2.</p>
+  </figcaption>
+
+  <div class="legend">
+    <span class="key"><span class="swatch"></span>Revenue per quarter</span>
+    <span class="key"><span class="swatch line"></span>Trend</span>
+  </div>
+
+  <svg viewBox="0 0 1200 600" role="img" aria-label="Bar and line chart of quarterly revenue from 1.2 million in Q1 2024 to 6.8 million in Q4 2025">
+    <!-- horizontal gridlines, drawn first so bars sit on top -->
+    <line class="grid" x1="90" y1="520.0" x2="1140" y2="520.0"/>
+    <line class="grid" x1="90" y1="454.3" x2="1140" y2="454.3"/>
+    <line class="grid" x1="90" y1="388.6" x2="1140" y2="388.6"/>
+    <line class="grid" x1="90" y1="322.9" x2="1140" y2="322.9"/>
+    <line class="grid" x1="90" y1="257.1" x2="1140" y2="257.1"/>
+    <line class="grid" x1="90" y1="191.4" x2="1140" y2="191.4"/>
+    <line class="grid" x1="90" y1="125.7" x2="1140" y2="125.7"/>
+    <line class="grid" x1="90" y1="60.0"  x2="1140" y2="60.0"/>
+
+    <!-- y axis ticks -->
+    <text class="tick" x="76" y="524" text-anchor="end">0</text>
+    <text class="tick" x="76" y="458" text-anchor="end">1</text>
+    <text class="tick" x="76" y="393" text-anchor="end">2</text>
+    <text class="tick" x="76" y="327" text-anchor="end">3</text>
+    <text class="tick" x="76" y="261" text-anchor="end">4</text>
+    <text class="tick" x="76" y="196" text-anchor="end">5</text>
+    <text class="tick" x="76" y="130" text-anchor="end">6</text>
+    <text class="tick" x="76" y="64"  text-anchor="end">7</text>
+    <text class="axistitle" x="90" y="34">Revenue (US$ millions)</text>
+
+    <!-- bars: height = value / 7 * 460px, all measured from a true zero baseline -->
+    <rect class="bar" x="120.6" y="441.1" width="70" height="78.9" rx="2"/>
+    <rect class="bar" x="251.9" y="395.1" width="70" height="124.9" rx="2"/>
+    <rect class="bar" x="383.1" y="362.3" width="70" height="157.7" rx="2"/>
+    <rect class="bar" x="514.4" y="316.3" width="70" height="203.7" rx="2"/>
+    <rect class="bar dip" x="645.6" y="322.9" width="70" height="197.1" rx="2"/>
+    <rect class="bar" x="776.9" y="230.9" width="70" height="289.1" rx="2"/>
+    <rect class="bar" x="908.1" y="184.9" width="70" height="335.1" rx="2"/>
+    <rect class="bar" x="1039.4" y="73.1" width="70" height="446.9" rx="2"/>
+
+    <!-- value labels -->
+    <text class="vlabel" x="155.6" y="431">1.2</text>
+    <text class="vlabel" x="286.9" y="385">1.9</text>
+    <text class="vlabel" x="418.1" y="352">2.4</text>
+    <text class="vlabel" x="549.4" y="306">3.1</text>
+    <text class="vlabel" x="680.6" y="313">3.0</text>
+    <text class="vlabel" x="811.9" y="221">4.4</text>
+    <text class="vlabel" x="943.1" y="175">5.1</text>
+    <text class="vlabel" x="1074.4" y="63">6.8</text>
+
+    <!-- trend line through bar-top centres -->
+    <polyline class="trend" points="155.6,441.1 286.9,395.1 418.1,362.3 549.4,316.3 680.6,322.9 811.9,230.9 943.1,184.9 1074.4,73.1"/>
+    <circle class="node" cx="155.6" cy="441.1" r="4"/>
+    <circle class="node" cx="286.9" cy="395.1" r="4"/>
+    <circle class="node" cx="418.1" cy="362.3" r="4"/>
+    <circle class="node" cx="549.4" cy="316.3" r="4"/>
+    <circle class="node" cx="680.6" cy="322.9" r="4"/>
+    <circle class="node" cx="811.9" cy="230.9" r="4"/>
+    <circle class="node" cx="943.1" cy="184.9" r="4"/>
+    <circle class="node" cx="1074.4" cy="73.1" r="4"/>
+
+    <!-- axes -->
+    <line class="axis" x1="90" y1="60" x2="90" y2="520"/>
+    <line class="axis" x1="90" y1="520" x2="1140" y2="520"/>
+
+    <!-- quarter labels -->
+    <text class="qlabel" x="155.6" y="544">Q1</text>
+    <text class="qlabel" x="286.9" y="544">Q2</text>
+    <text class="qlabel" x="418.1" y="544">Q3</text>
+    <text class="qlabel" x="549.4" y="544">Q4</text>
+    <text class="qlabel" x="680.6" y="544">Q1</text>
+    <text class="qlabel" x="811.9" y="544">Q2</text>
+    <text class="qlabel" x="943.1" y="544">Q3</text>
+    <text class="qlabel" x="1074.4" y="544">Q4</text>
+
+    <!-- year bands -->
+    <line class="grid" x1="615" y1="530" x2="615" y2="576"/>
+    <text class="yearband" x="352" y="572">2024</text>
+    <text class="yearband" x="877" y="572">2025</text>
+  </svg>
+</figure>
+</body>
+</html>

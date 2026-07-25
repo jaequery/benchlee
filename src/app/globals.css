@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink-950: #08090b;
+  --color-ink-900: #0d0f13;
+  --color-ink-850: #121419;
+  --color-ink-800: #171a20;
+  --color-ink-700: #1f232b;
+  --color-ink-600: #2a2f39;
+  --color-ink-500: #3a4150;
+  --color-ink-400: #6b7280;
+  --color-ink-300: #9aa2b1;
+  --color-ink-200: #c7ccd6;
+  --color-ink-100: #eceef3;
+
+  --color-lime-benchlee: #d4ff3f;
+  --color-lime-dim: #a8cc2e;
+
+  --font-sans:
+    ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto,
+    "Helvetica Neue", sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-ink-700);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-ink-950);
+    color: var(--color-ink-100);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-lime-benchlee);
+    color: #08090b;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-lime-benchlee);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* Grain + grid backdrop used behind the hero. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Numeric columns line up when they're tabular. */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-family: var(--font-mono);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motion-safe-only {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+}

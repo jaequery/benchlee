@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — Not Found</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 48px 20px;
+    background: #0b0d10;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: #c9d1d9;
+  }
+
+  .window {
+    width: min(680px, 100%);
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px -24px rgba(0,0,0,.9);
+  }
+  .titlebar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 14px;
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #ff5f56; }
+  .dot.y { background: #ffbd2e; }
+  .dot.g { background: #27c93f; }
+  .titlebar span {
+    margin-left: 8px;
+    font-size: 12.5px;
+    color: #8b949e;
+  }
+
+  .body { padding: 22px 20px 26px; font-size: 13.5px; line-height: 1.75; }
+  .line { white-space: pre-wrap; word-break: break-word; }
+  .prompt { color: #58a6ff; }
+  .err { color: #ff7b72; }
+  .warn { color: #d29922; }
+  .dim { color: #6e7681; }
+  .path { color: #a5d6ff; }
+
+  .trace { margin: 4px 0 18px; padding-left: 18px; color: #8b949e; }
+
+  a.cmd {
+    display: inline-block;
+    margin-top: 6px;
+    text-decoration: none;
+    color: #7ee787;
+    border-bottom: 1px dashed #2ea043;
+    padding-bottom: 2px;
+    font-size: 14px;
+  }
+  a.cmd:hover { color: #b7f5c1; border-bottom-style: solid; }
+
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    background: #58a6ff;
+    vertical-align: -3px;
+    margin-left: 4px;
+    animation: blink 1.15s steps(2, start) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
+</style>
+</head>
+<body>
+  <div class="window">
+    <div class="titlebar">
+      <i class="dot r"></i><i class="dot y"></i><i class="dot g"></i>
+      <span>~/you-are-here — zsh — 80×24</span>
+    </div>
+
+    <div class="body">
+      <p class="line"><span class="prompt">$</span> cat <span class="path">/the/page/you/wanted</span></p>
+      <p class="line err">cat: /the/page/you/wanted: No such file or directory</p>
+      <p class="line dim">exit status 404</p>
+
+      <p class="line" style="margin-top:16px"><span class="prompt">$</span> whereis it</p>
+      <p class="line warn">Traceback (most recent call last):</p>
+      <div class="trace">
+        <p class="line">File <span class="path">"router.js"</span>, line 42, in <span class="dim">resolve()</span></p>
+        <p class="line">File <span class="path">"history.js"</span>, line 7, in <span class="dim">aLinkSomeoneSharedIn2019()</span></p>
+        <p class="line">File <span class="path">"reality.js"</span>, line 1, in <span class="dim">&lt;module&gt;</span></p>
+      </div>
+      <p class="line err">RouteNotFound: it moved, and nobody left a note</p>
+
+      <p class="line" style="margin-top:18px"><span class="prompt">$</span> cd <a class="cmd" href="/">~/home</a><span class="cursor"></span></p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 · Signal Lost</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 50% 120%, #16234a 0%, #070a16 55%, #04050c 100%);
+    color: #d8e0f5;
+    font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+    display: grid;
+    place-items: center;
+    position: relative;
+  }
+
+  /* Three parallax starfields, built from box-shadows only. */
+  .stars, .stars2, .stars3 {
+    position: absolute;
+    inset: -50% 0 0;
+    width: 2px; height: 2px;
+    border-radius: 50%;
+    background: transparent;
+  }
+  .stars {
+    box-shadow:
+      120px 340px #fff, 480px 120px #cfe0ff, 760px 520px #fff, 1180px 260px #fff,
+      220px 780px #9fb6ff, 940px 700px #fff, 1420px 480px #cfe0ff, 300px 180px #fff,
+      1600px 820px #fff, 640px 900px #9fb6ff, 1820px 200px #fff, 80px 620px #cfe0ff;
+    animation: drift 90s linear infinite;
+  }
+  .stars2 {
+    width: 1px; height: 1px;
+    box-shadow:
+      340px 220px #b9c9f0, 900px 380px #fff, 1300px 640px #b9c9f0, 160px 900px #fff,
+      1700px 340px #fff, 560px 660px #b9c9f0, 1080px 880px #fff, 1900px 700px #b9c9f0;
+    animation: drift 150s linear infinite;
+    opacity: .75;
+  }
+  .stars3 {
+    width: 3px; height: 3px;
+    box-shadow: 700px 260px #7fa0ff, 1500px 760px #7fa0ff, 260px 500px #7fa0ff;
+    animation: drift 220s linear infinite;
+    opacity: .5;
+  }
+  @keyframes drift { to { transform: translateY(50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .stars, .stars2, .stars3 { animation: none; }
+  }
+
+  .panel {
+    position: relative;
+    text-align: center;
+    padding: 40px 24px;
+    max-width: 620px;
+  }
+
+  .marker {
+    width: 132px;
+    height: 132px;
+    margin: 0 auto 34px;
+    position: relative;
+  }
+  .marker::before, .marker::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(127,160,255,.5);
+    animation: ping 3.6s ease-out infinite;
+  }
+  .marker::after { animation-delay: 1.8s; }
+  @keyframes ping {
+    0%   { transform: scale(.35); opacity: 1; }
+    100% { transform: scale(1);   opacity: 0; }
+  }
+  .marker i {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 12px; height: 12px;
+    margin: -6px 0 0 -6px;
+    border-radius: 50%;
+    background: #7fa0ff;
+    box-shadow: 0 0 22px 4px rgba(127,160,255,.75);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marker::before, .marker::after { animation: none; opacity: .35; }
+  }
+
+  .code {
+    font-size: 78px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    line-height: 1;
+    background: linear-gradient(180deg, #ffffff, #7fa0ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  h1 {
+    margin-top: 14px;
+    font-size: 21px;
+    font-weight: 500;
+    letter-spacing: .02em;
+  }
+  p.sub {
+    margin-top: 12px;
+    color: #8e9ac4;
+    font-size: 15.5px;
+    line-height: 1.65;
+  }
+  .coords {
+    margin-top: 20px;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 12px;
+    letter-spacing: .14em;
+    color: #5f6c96;
+  }
+  a.back {
+    display: inline-block;
+    margin-top: 34px;
+    text-decoration: none;
+    color: #04050c;
+    background: #9fb6ff;
+    padding: 13px 26px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: background .18s ease, transform .18s ease;
+  }
+  a.back:hover { background: #c3d1ff; transform: translateY(-1px); }
+</style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="stars2"></div>
+  <div class="stars3"></div>
+
+  <div class="panel">
+    <div class="marker"><i></i></div>
+    <div class="code">404</div>
+    <h1>Signal lost</h1>
+    <p class="sub">We pointed the dish at this address and heard nothing back.<br>The page may have drifted, or it was never in orbit.</p>
+    <p class="coords">LAST PING · 404.000 / −0.000 · NO RESPONSE</p>
+    <a class="back" href="/">Return to known space</a>
+  </div>
+</body>
+</html>
