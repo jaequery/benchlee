@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aurora Clock — CSS Only</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 28px;
+    background: #05060a;
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    color: #7f88a3;
+    padding: 40px 20px;
+  }
+
+  .stage { position: relative; display: grid; place-items: center; }
+
+  /* decorative pulsing ring behind the dial */
+  .halo {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #22d3ee, #a78bfa, #f472b6, #22d3ee);
+    filter: blur(38px);
+    opacity: .32;
+    animation: spin 24s linear infinite, breathe 6s ease-in-out infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes breathe { 0%, 100% { opacity: .22; } 50% { opacity: .42; } }
+
+  .dial {
+    position: relative;
+    width: 330px;
+    height: 330px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 40%, #171a2b 0%, #0b0d16 70%);
+    border: 1px solid #2b3050;
+    box-shadow: 0 0 70px -18px rgba(167,139,250,.6);
+  }
+
+  .numeral {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: start center;
+    padding-top: 16px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #b9c2e0;
+  }
+  .numeral span { display: block; }
+  .n1  { transform: rotate(30deg); }  .n1 span  { transform: rotate(-30deg); }
+  .n2  { transform: rotate(60deg); }  .n2 span  { transform: rotate(-60deg); }
+  .n3  { transform: rotate(90deg); }  .n3 span  { transform: rotate(-90deg); }
+  .n4  { transform: rotate(120deg); } .n4 span  { transform: rotate(-120deg); }
+  .n5  { transform: rotate(150deg); } .n5 span  { transform: rotate(-150deg); }
+  .n6  { transform: rotate(180deg); } .n6 span  { transform: rotate(-180deg); }
+  .n7  { transform: rotate(210deg); } .n7 span  { transform: rotate(-210deg); }
+  .n8  { transform: rotate(240deg); } .n8 span  { transform: rotate(-240deg); }
+  .n9  { transform: rotate(270deg); } .n9 span  { transform: rotate(-270deg); }
+  .n10 { transform: rotate(300deg); } .n10 span { transform: rotate(-300deg); }
+  .n11 { transform: rotate(330deg); } .n11 span { transform: rotate(-330deg); }
+
+  .hand {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    transform-origin: 50% 100%;
+    border-radius: 999px;
+    animation-name: tick;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes tick {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to   { transform: translateX(-50%) rotate(360deg); }
+  }
+  /* No animation-delay: the clock begins its cycle at 12:00 on page load. */
+  .hour   { width: 8px;  height: 82px;  background: linear-gradient(#e5e9f5, #96a0c4); animation-duration: 43200s; }
+  .minute { width: 5px;  height: 118px; background: linear-gradient(#cfd6ea, #8c96ba); animation-duration: 3600s; }
+  .second { width: 2px;  height: 132px; background: #22d3ee; animation-duration: 60s; box-shadow: 0 0 10px #22d3ee; }
+
+  .hub {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 14px; height: 14px;
+    margin: -7px 0 0 -7px;
+    border-radius: 50%;
+    background: #22d3ee;
+    box-shadow: 0 0 14px #22d3ee;
+  }
+  .caption { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="halo"></div>
+    <div class="dial">
+      <div class="numeral n0"><span>12</span></div>
+      <div class="numeral n1"><span>1</span></div>
+      <div class="numeral n2"><span>2</span></div>
+      <div class="numeral n3"><span>3</span></div>
+      <div class="numeral n4"><span>4</span></div>
+      <div class="numeral n5"><span>5</span></div>
+      <div class="numeral n6"><span>6</span></div>
+      <div class="numeral n7"><span>7</span></div>
+      <div class="numeral n8"><span>8</span></div>
+      <div class="numeral n9"><span>9</span></div>
+      <div class="numeral n10"><span>10</span></div>
+      <div class="numeral n11"><span>11</span></div>
+
+      <div class="hand hour"></div>
+      <div class="hand minute"></div>
+      <div class="hand second"></div>
+      <div class="hub"></div>
+    </div>
+  </div>
+  <p class="caption">Zero JavaScript</p>
+</body>
+</html>

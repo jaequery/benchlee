@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing</title>
+<style>
+  :root {
+    --bg: #0b0c0e;
+    --panel: #141619;
+    --panel-2: #1a1d21;
+    --line: #24282e;
+    --text: #f2f4f7;
+    --muted: #8b929c;
+    --accent: #7cf2b0;
+    --accent-ink: #04150c;
+    --sp: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 400 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: calc(var(--sp) * 10) calc(var(--sp) * 3);
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: calc(var(--sp) * 7); }
+  .eyebrow {
+    font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: var(--sp);
+  }
+  h1 { font-size: 44px; line-height: 1.1; letter-spacing: -.025em; font-weight: 650; }
+  header p { color: var(--muted); margin-top: calc(var(--sp) * 2); font-size: 17px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: calc(var(--sp) * 3);
+    align-items: center;
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: calc(var(--sp) * 4);
+    display: flex; flex-direction: column;
+    transition: border-color .18s ease, transform .18s ease;
+  }
+  .card:hover { border-color: #343a42; transform: translateY(-2px); }
+
+  /* The recommended tier is physically larger — hierarchy you feel before you read. */
+  .card.featured {
+    background: var(--panel-2);
+    border-color: var(--accent);
+    padding: calc(var(--sp) * 5) calc(var(--sp) * 4);
+    box-shadow: 0 0 0 1px rgba(124,242,176,.12), 0 24px 60px -30px rgba(124,242,176,.5);
+    position: relative;
+  }
+  .flag {
+    position: absolute; top: calc(var(--sp) * -1.5); left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: var(--accent-ink);
+    font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 999px; white-space: nowrap;
+  }
+
+  .tier { font-size: 14px; font-weight: 600; letter-spacing: .04em; color: var(--muted); text-transform: uppercase; }
+  .price { display: flex; align-items: baseline; gap: 6px; margin: calc(var(--sp) * 2) 0 var(--sp); }
+  .price b { font-size: 46px; font-weight: 650; letter-spacing: -.03em; line-height: 1; }
+  .price span { color: var(--muted); font-size: 14px; }
+  .blurb { color: var(--muted); font-size: 14px; min-height: 40px; }
+
+  ul { list-style: none; margin: calc(var(--sp) * 3) 0; display: grid; gap: calc(var(--sp) * 1.5); }
+  li { display: flex; gap: 10px; align-items: flex-start; font-size: 14.5px; color: #d5d9df; }
+  li svg { flex: none; margin-top: 4px; }
+  li.off { color: #5c636d; }
+
+  .btn {
+    margin-top: auto; display: block; text-align: center; text-decoration: none;
+    padding: 12px 16px; border-radius: 9px; font-weight: 600; font-size: 15px;
+    border: 1px solid var(--line); color: var(--text); background: transparent;
+    transition: background .16s ease, border-color .16s ease;
+  }
+  .btn:hover { background: #1f2329; border-color: #3a4048; }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .btn.primary:hover { background: #96f7c2; border-color: #96f7c2; }
+
+  .footnote {
+    margin-top: calc(var(--sp) * 6); padding-top: calc(var(--sp) * 3);
+    border-top: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; justify-content: center; gap: calc(var(--sp) * 4);
+    color: var(--muted); font-size: 13.5px;
+  }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } .card.featured { padding: calc(var(--sp)*4); } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Pricing</div>
+    <h1>Start free. Grow when it hurts.</h1>
+    <p>No seat minimums, no annual lock-in. Change plan whenever you like.</p>
+  </header>
+
+  <div class="grid">
+    <section class="card">
+      <div class="tier">Solo</div>
+      <div class="price"><b>$0</b><span>forever</span></div>
+      <p class="blurb">Everything one person needs to ship something real.</p>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5l3.2 3.2L12 4" fill="none" stroke="#7cf2b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>1 project</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5l3.2 3.2L12 4" fill="none" stroke="#7cf2b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>10k events / month</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5l3.2 3.2L12 4" fill="none" stroke="#7cf2b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Community support</li>
+        <li class="off"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M4 4l6 6M10 4l-6 6" fill="none" stroke="#464c55" stroke-width="2" stroke-linecap="round"/></svg>Team seats</li>
+      </ul>
+      <a class="btn" href="#">Get started</a>
+    </section>
+
+    <section class="card featured">
+      <div class="flag">Most teams start here</div>
+      <div class="tier">Studio</div>
+      <div class="price"><b>$24</b><span>/ month</span></div>
+      <p class="blurb">For small teams who have stopped pretending it's a side project.</p>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5l3.2 3.2L12 4" fill="none" stroke="#7cf2b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>10 projects</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5l3.2 3.2L12 4" fill="none" stroke="#7cf2b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>1M events / month</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5l3.2 3.2L12 4" fill="none" stroke="#7cf2b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>5 team seats</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5l3.2 3.2L12 4" fill="none" stroke="#7cf2b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Email support, 1 business day</li>
+      </ul>
+      <a class="btn primary" href="#">Start 14-day trial</a>
+    </section>
+
+    <section class="card">
+      <div class="tier">Scale</div>
+      <div class="price"><b>$96</b><span>/ month</span></div>
+      <p class="blurb">When downtime costs more than the invoice does.</p>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5l3.2 3.2L12 4" fill="none" stroke="#7cf2b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited projects</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5l3.2 3.2L12 4" fill="none" stroke="#7cf2b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>25M events / month</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5l3.2 3.2L12 4" fill="none" stroke="#7cf2b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited seats + SSO</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7.5l3.2 3.2L12 4" fill="none" stroke="#7cf2b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>99.9% uptime SLA</li>
+      </ul>
+      <a class="btn" href="#">Talk to us</a>
+    </section>
+  </div>
+
+  <div class="footnote">
+    <span>Cancel any time</span>
+    <span>Prices exclude VAT</span>
+    <span>Non-profit and student discounts available</span>
+  </div>
+</div>
+</body>
+</html>

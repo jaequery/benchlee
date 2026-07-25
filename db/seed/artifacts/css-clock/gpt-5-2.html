@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pure CSS Analog Clock</title>
+<style>
+  /* Constraint: CSS only, no JavaScript.
+     Periods: second = 60s, minute = 3600s, hour = 43200s.
+     The second hand uses steps(60) so it ticks like a quartz movement instead of
+     gliding; the other two are linear. */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    background: #101418;
+    color: #7d8894;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 40px 16px;
+  }
+
+  .clock {
+    --size: 320px;
+    position: relative;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background: #171c22;
+    border: 2px solid #2a323b;
+    box-shadow: inset 0 0 40px rgba(0,0,0,.6), 0 20px 50px -20px rgba(0,0,0,.8);
+  }
+
+  .ticks { position: absolute; inset: 0; }
+  .ticks i {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+  .ticks i::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 12px;
+    background: #46515d;
+    border-radius: 1px;
+  }
+  .ticks i:nth-child(1)  { transform: rotate(0deg); }
+  .ticks i:nth-child(2)  { transform: rotate(30deg); }
+  .ticks i:nth-child(3)  { transform: rotate(60deg); }
+  .ticks i:nth-child(4)  { transform: rotate(90deg); }
+  .ticks i:nth-child(5)  { transform: rotate(120deg); }
+  .ticks i:nth-child(6)  { transform: rotate(150deg); }
+  .ticks i:nth-child(7)  { transform: rotate(180deg); }
+  .ticks i:nth-child(8)  { transform: rotate(210deg); }
+  .ticks i:nth-child(9)  { transform: rotate(240deg); }
+  .ticks i:nth-child(10) { transform: rotate(270deg); }
+  .ticks i:nth-child(11) { transform: rotate(300deg); }
+  .ticks i:nth-child(12) { transform: rotate(330deg); }
+  .ticks i:nth-child(3n+1)::before {
+    height: 18px;
+    width: 3px;
+    background: #93a1af;
+  }
+
+  .hand {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    transform-origin: bottom center;
+    border-radius: 4px;
+    animation-name: rotate;
+    animation-iteration-count: infinite;
+  }
+  @keyframes rotate {
+    from { transform: translateX(-50%) rotate(0turn); }
+    to   { transform: translateX(-50%) rotate(1turn); }
+  }
+  .hour {
+    width: 8px;
+    height: 82px;
+    background: #dfe6ed;
+    animation-duration: 43200s;
+    animation-timing-function: linear;
+    animation-delay: -33000s;
+  }
+  .minute {
+    width: 5px;
+    height: 118px;
+    background: #b7c2ce;
+    animation-duration: 3600s;
+    animation-timing-function: linear;
+    animation-delay: -1800s;
+  }
+  .second {
+    width: 2px;
+    height: 132px;
+    background: #ff5f56;
+    animation-duration: 60s;
+    animation-timing-function: steps(60, end);
+    animation-delay: -25s;
+  }
+  .cap {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 14px; height: 14px;
+    margin: -7px 0 0 -7px;
+    border-radius: 50%;
+    background: #ff5f56;
+    border: 3px solid #171c22;
+  }
+  .label { font-size: 13px; letter-spacing: .06em; }
+</style>
+</head>
+<body>
+  <div class="clock">
+    <div class="ticks">
+      <i></i><i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+    <div class="hand hour"></div>
+    <div class="hand minute"></div>
+    <div class="hand second"></div>
+    <div class="cap"></div>
+  </div>
+  <p class="label">CSS-only movement — 60s / 3600s / 43200s</p>
+</body>
+</html>

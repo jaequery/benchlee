@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CSS Clock</title>
+<style>
+body {
+  background-color: #222222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.clock {
+  width: 300px;
+  height: 300px;
+  border: 8px solid #ffffff;
+  border-radius: 50%;
+  position: relative;
+  background-color: #333333;
+}
+
+.marker {
+  position: absolute;
+  background-color: #ffffff;
+  width: 4px;
+  height: 15px;
+  left: 50%;
+  margin-left: -2px;
+}
+
+.marker-12 { top: 10px; }
+.marker-6 { bottom: 10px; }
+.marker-3 { top: 50%; right: 10px; left: auto; margin-top: -2px; width: 15px; height: 4px; }
+.marker-9 { top: 50%; left: 10px; margin-top: -2px; width: 15px; height: 4px; }
+
+.hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  background-color: #ffffff;
+}
+
+.hour-hand {
+  width: 6px;
+  height: 70px;
+  margin-left: -3px;
+  animation: rotate 3600s linear infinite;
+}
+
+.minute-hand {
+  width: 4px;
+  height: 100px;
+  margin-left: -2px;
+  animation: rotate 60s linear infinite;
+}
+
+.second-hand {
+  width: 2px;
+  height: 120px;
+  margin-left: -1px;
+  background-color: red;
+  animation: rotate 60s linear infinite;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  background-color: red;
+  border-radius: 50%;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+
+<div class="clock">
+  <div class="marker marker-12"></div>
+  <div class="marker marker-3"></div>
+  <div class="marker marker-6"></div>
+  <div class="marker marker-9"></div>
+
+  <div class="hand hour-hand"></div>
+  <div class="hand minute-hand"></div>
+  <div class="hand second-hand"></div>
+  <div class="center"></div>
+</div>
+
+</body>
+</html>

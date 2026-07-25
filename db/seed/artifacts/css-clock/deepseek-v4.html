@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analog Clock (CSS only)</title>
+<style>
+  /* Requirement check:
+       - no <script> tag anywhere
+       - second hand: 60s per revolution
+       - minute hand: 3600s per revolution
+       - hour hand:   43200s per revolution
+       - twelve hour markers */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    background: #14161a;
+    color: #838a94;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    padding: 40px 16px;
+  }
+
+  .clock {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: #1c1f25;
+    border: 6px solid #2b3038;
+  }
+
+  .tick {
+    position: absolute;
+    inset: 0;
+  }
+  .tick::after {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 2px;
+    height: 12px;
+    margin-left: -1px;
+    background: #6f7883;
+  }
+  .tick:nth-of-type(1)  { transform: rotate(0deg); }
+  .tick:nth-of-type(2)  { transform: rotate(30deg); }
+  .tick:nth-of-type(3)  { transform: rotate(60deg); }
+  .tick:nth-of-type(4)  { transform: rotate(90deg); }
+  .tick:nth-of-type(5)  { transform: rotate(120deg); }
+  .tick:nth-of-type(6)  { transform: rotate(150deg); }
+  .tick:nth-of-type(7)  { transform: rotate(180deg); }
+  .tick:nth-of-type(8)  { transform: rotate(210deg); }
+  .tick:nth-of-type(9)  { transform: rotate(240deg); }
+  .tick:nth-of-type(10) { transform: rotate(270deg); }
+  .tick:nth-of-type(11) { transform: rotate(300deg); }
+  .tick:nth-of-type(12) { transform: rotate(330deg); }
+
+  .hand {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    transform-origin: bottom center;
+    animation: revolve linear infinite;
+  }
+  @keyframes revolve {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to   { transform: translateX(-50%) rotate(360deg); }
+  }
+
+  .hand.hour   { width: 5px; height: 74px;  background: #dfe3e9; animation-duration: 43200s; }
+  .hand.minute { width: 3px; height: 106px; background: #c3c9d1; animation-duration: 3600s; }
+  .hand.second { width: 1.5px; height: 118px; background: #e5484d; animation-duration: 60s; }
+
+  .pivot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 9px;
+    height: 9px;
+    margin: -4.5px 0 0 -4.5px;
+    border-radius: 50%;
+    background: #e5484d;
+  }
+
+  .meta { font-size: 13px; color: #6b727c; }
+</style>
+</head>
+<body>
+  <div class="clock">
+    <div class="tick"></div><div class="tick"></div><div class="tick"></div>
+    <div class="tick"></div><div class="tick"></div><div class="tick"></div>
+    <div class="tick"></div><div class="tick"></div><div class="tick"></div>
+    <div class="tick"></div><div class="tick"></div><div class="tick"></div>
+
+    <div class="hand hour"></div>
+    <div class="hand minute"></div>
+    <div class="hand second"></div>
+    <div class="pivot"></div>
+  </div>
+  <p class="meta">Pure CSS · no scripts</p>
+</body>
+</html>

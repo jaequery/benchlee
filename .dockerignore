@@ -1,0 +1,13 @@
+node_modules
+.next
+.git
+.github
+.fredrin
+storage
+README.md
+*.md
+!db/**/*.md
+.env
+.env*.local
+Dockerfile
+.dockerignore

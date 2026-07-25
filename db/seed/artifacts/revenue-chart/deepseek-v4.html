@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quarterly Revenue 2024–2025</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+    background: #f7f8fa;
+    color: #14161a;
+    padding: 40px 24px;
+    display: flex;
+    justify-content: center;
+  }
+  .chart {
+    width: 100%;
+    max-width: 1140px;
+    background: #fff;
+    border: 1px solid #e2e5ea;
+    border-radius: 8px;
+    padding: 26px 30px 18px;
+  }
+  h1 { font-size: 19px; font-weight: 600; }
+  p.note { color: #656b74; font-size: 13px; margin-top: 6px; }
+  .legend { margin-top: 16px; font-size: 13px; color: #4a5058; display: flex; gap: 18px; }
+  .legend span::before {
+    content: "";
+    display: inline-block;
+    width: 12px; height: 12px;
+    margin-right: 7px;
+    vertical-align: -1px;
+    border-radius: 2px;
+    background: #1f6feb;
+  }
+  .legend span.trend::before { background: #2ea043; height: 3px; border-radius: 0; vertical-align: 4px; }
+  svg { width: 100%; height: auto; display: block; margin-top: 8px; }
+  .grid { stroke: #eceef1; }
+  .axis { stroke: #7d848d; stroke-width: 1; }
+  .tick { fill: #656b74; font-size: 12px; }
+  .cat { fill: #3d434b; font-size: 12px; text-anchor: middle; }
+  .year { fill: #8b929b; font-size: 11px; text-anchor: middle; letter-spacing: .1em; }
+</style>
+</head>
+<body>
+<div class="chart">
+  <h1>Quarterly revenue, 2024–2025</h1>
+  <p class="note">Values in millions of USD. Zero baseline; bar height is proportional to value.</p>
+  <div class="legend">
+    <span>Revenue</span>
+    <span class="trend">Trend</span>
+  </div>
+
+  <svg viewBox="0 0 1140 540" role="img" aria-label="Quarterly revenue chart">
+    <line class="grid" x1="72" y1="460" x2="1100" y2="460"/>
+    <line class="grid" x1="72" y1="403" x2="1100" y2="403"/>
+    <line class="grid" x1="72" y1="346" x2="1100" y2="346"/>
+    <line class="grid" x1="72" y1="289" x2="1100" y2="289"/>
+    <line class="grid" x1="72" y1="232" x2="1100" y2="232"/>
+    <line class="grid" x1="72" y1="175" x2="1100" y2="175"/>
+    <line class="grid" x1="72" y1="118" x2="1100" y2="118"/>
+    <line class="grid" x1="72" y1="61"  x2="1100" y2="61"/>
+
+    <text class="tick" x="60" y="464" text-anchor="end">0</text>
+    <text class="tick" x="60" y="407" text-anchor="end">1</text>
+    <text class="tick" x="60" y="350" text-anchor="end">2</text>
+    <text class="tick" x="60" y="293" text-anchor="end">3</text>
+    <text class="tick" x="60" y="236" text-anchor="end">4</text>
+    <text class="tick" x="60" y="179" text-anchor="end">5</text>
+    <text class="tick" x="60" y="122" text-anchor="end">6</text>
+    <text class="tick" x="60" y="65"  text-anchor="end">7</text>
+
+    <!-- 57px per 1.0M, baseline 460 -->
+    <rect fill="#1f6feb" x="98"   y="391.6" width="72" height="68.4"/>
+    <rect fill="#1f6feb" x="226"  y="351.7" width="72" height="108.3"/>
+    <rect fill="#1f6feb" x="354"  y="323.2" width="72" height="136.8"/>
+    <rect fill="#1f6feb" x="482"  y="283.3" width="72" height="176.7"/>
+    <rect fill="#1f6feb" x="610"  y="289.0" width="72" height="171.0"/>
+    <rect fill="#1f6feb" x="738"  y="209.2" width="72" height="250.8"/>
+    <rect fill="#1f6feb" x="866"  y="169.3" width="72" height="290.7"/>
+    <rect fill="#1f6feb" x="994"  y="72.4"  width="72" height="387.6"/>
+
+    <polyline fill="none" stroke="#2ea043" stroke-width="2.5"
+      points="134,391.6 262,351.7 390,323.2 518,283.3 646,289.0 774,209.2 902,169.3 1030,72.4"/>
+
+    <line class="axis" x1="72" y1="61" x2="72" y2="460"/>
+    <line class="axis" x1="72" y1="460" x2="1100" y2="460"/>
+
+    <text class="cat" x="134"  y="482">Q1</text>
+    <text class="cat" x="262"  y="482">Q2</text>
+    <text class="cat" x="390"  y="482">Q3</text>
+    <text class="cat" x="518"  y="482">Q4</text>
+    <text class="cat" x="646"  y="482">Q1</text>
+    <text class="cat" x="774"  y="482">Q2</text>
+    <text class="cat" x="902"  y="482">Q3</text>
+    <text class="cat" x="1030" y="482">Q4</text>
+
+    <text class="year" x="326" y="508">2024</text>
+    <text class="year" x="838" y="508">2025</text>
+  </svg>
+</div>
+</body>
+</html>

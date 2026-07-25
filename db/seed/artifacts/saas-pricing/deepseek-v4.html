@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --surface: #171a20;
+    --border: #262b33;
+    --fg: #e8eaed;
+    --dim: #969ba5;
+    --accent: #ff7a45;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", sans-serif;
+    line-height: 1.5;
+    padding: 64px 24px;
+  }
+  main { max-width: 1024px; margin: 0 auto; }
+  .intro { text-align: center; margin-bottom: 48px; }
+  .intro h1 { font-size: 38px; font-weight: 700; letter-spacing: -0.02em; }
+  .intro p { color: var(--dim); margin-top: 12px; }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: stretch;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  .card--highlight {
+    border: 2px solid var(--accent);
+    padding: 34px 24px;
+    margin-top: -6px;
+    margin-bottom: -6px;
+  }
+  .label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    height: 18px;
+    margin-bottom: 6px;
+  }
+  h2 { font-size: 19px; font-weight: 600; }
+  .amount { margin: 14px 0 4px; font-size: 40px; font-weight: 700; letter-spacing: -0.03em; }
+  .amount small { font-size: 14px; font-weight: 400; color: var(--dim); letter-spacing: 0; }
+  .tagline { color: var(--dim); font-size: 14px; min-height: 40px; }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 20px 0; }
+  ul { list-style: none; display: grid; gap: 10px; font-size: 14px; }
+  li { padding-left: 22px; position: relative; color: #c6cad1; }
+  li::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 7px;
+    width: 6px;
+    height: 10px;
+    border: solid var(--accent);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .action {
+    margin-top: 28px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 11px 16px;
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    color: var(--fg);
+  }
+  .action--solid { background: var(--accent); border-color: var(--accent); color: #1a0d06; }
+  .note { text-align: center; margin-top: 40px; color: var(--dim); font-size: 13px; }
+  @media (max-width: 860px) {
+    .cards { grid-template-columns: 1fr; }
+    .card--highlight { margin: 0; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="intro">
+    <h1>Pricing</h1>
+    <p>Three plans. No hidden per-seat maths.</p>
+  </div>
+
+  <div class="cards">
+    <section class="card">
+      <div class="label"></div>
+      <h2>Solo</h2>
+      <div class="amount">$0<small> / forever</small></div>
+      <p class="tagline">For a single builder validating an idea.</p>
+      <hr>
+      <ul>
+        <li>1 project</li>
+        <li>10K events per month</li>
+        <li>7-day retention</li>
+        <li>Community support</li>
+      </ul>
+      <a class="action" href="#">Create account</a>
+    </section>
+
+    <section class="card card--highlight">
+      <div class="label">Recommended</div>
+      <h2>Studio</h2>
+      <div class="amount">$24<small> / month</small></div>
+      <p class="tagline">For a small team with production traffic.</p>
+      <hr>
+      <ul>
+        <li>10 projects</li>
+        <li>1M events per month</li>
+        <li>90-day retention</li>
+        <li>5 seats included</li>
+        <li>Email support</li>
+      </ul>
+      <a class="action action--solid" href="#">Start 14-day trial</a>
+    </section>
+
+    <section class="card">
+      <div class="label"></div>
+      <h2>Scale</h2>
+      <div class="amount">$96<small> / month</small></div>
+      <p class="tagline">For organisations with compliance requirements.</p>
+      <hr>
+      <ul>
+        <li>Unlimited projects</li>
+        <li>25M events per month</li>
+        <li>2-year retention</li>
+        <li>Unlimited seats, SSO</li>
+        <li>99.9% uptime SLA</li>
+      </ul>
+      <a class="action" href="#">Contact sales</a>
+    </section>
+  </div>
+
+  <p class="note">Prices in USD, excluding applicable tax. Cancel at any time.</p>
+</main>
+</body>
+</html>

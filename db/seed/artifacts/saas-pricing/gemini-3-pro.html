@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Choose Your Plan</title>
+<style>
+  :root {
+    --bg: #08070d;
+    --card: #12111c;
+    --border: #262435;
+    --primary: #a78bfa;
+    --secondary: #22d3ee;
+    --fg: #ede9fe;
+    --dim: #9691ad;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background:
+      radial-gradient(900px 500px at 20% -10%, rgba(167,139,250,.18), transparent 60%),
+      radial-gradient(700px 400px at 85% 10%, rgba(34,211,238,.14), transparent 55%),
+      var(--bg);
+    color: var(--fg);
+    font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+    padding: 80px 20px 60px;
+    min-height: 100vh;
+  }
+  .head { text-align: center; margin-bottom: 60px; }
+  .kicker {
+    display: inline-block;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 12px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 20px;
+  }
+  h1 { font-size: 48px; font-weight: 700; letter-spacing: -.03em; line-height: 1.05; }
+  h1 em { font-style: normal; color: var(--primary); }
+  .head p { color: var(--dim); margin-top: 18px; font-size: 17px; }
+
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    max-width: 1060px;
+    margin: 0 auto;
+  }
+  .tier {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 34px 28px 22px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .tier.pick {
+    border-color: var(--primary);
+    box-shadow: 0 0 80px -20px rgba(167,139,250,.55), inset 0 0 60px -40px rgba(34,211,238,.6);
+  }
+  .ribbon {
+    position: absolute;
+    top: 18px; right: -42px;
+    transform: rotate(45deg);
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: #08070d;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 6px 48px;
+  }
+  .tname { font-size: 15px; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
+  .cost { margin: 18px 0 6px; }
+  .cost b { font-size: 52px; font-weight: 700; letter-spacing: -.04em; }
+  .cost i { font-style: normal; color: var(--dim); font-size: 15px; }
+  .pitch { color: var(--dim); font-size: 14px; line-height: 1.6; min-height: 44px; }
+  ul { list-style: none; margin: 26px 0 30px; display: grid; gap: 13px; }
+  li { font-size: 14px; display: flex; gap: 10px; align-items: center; color: #cfc9e6; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--secondary); flex: none; }
+  .go {
+    margin-top: auto;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--fg);
+    border: 1px solid var(--border);
+  }
+  .go.hot {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: #08070d;
+    border-color: transparent;
+  }
+  /* footer padding differs per card — the recommended tier ends up taller */
+  .tier.pick .go { margin-bottom: 12px; }
+  .legal { text-align: center; color: #6b6682; font-size: 13px; margin-top: 44px; }
+  @media (max-width: 880px) { .tiers { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <div class="head">
+    <span class="kicker">Pricing</span>
+    <h1>Plans that scale <em>with you</em></h1>
+    <p>From a weekend prototype to production traffic — same product, different ceiling.</p>
+  </div>
+
+  <div class="tiers">
+    <div class="tier">
+      <div class="tname">Solo</div>
+      <div class="cost"><b>$0</b> <i>forever</i></div>
+      <p class="pitch">For one person and one very good idea.</p>
+      <ul>
+        <li><span class="dot"></span>1 project</li>
+        <li><span class="dot"></span>10K events / month</li>
+        <li><span class="dot"></span>Community Discord</li>
+      </ul>
+      <a class="go" href="#">Start building</a>
+    </div>
+
+    <div class="tier pick">
+      <div class="ribbon">Popular</div>
+      <div class="tname">Studio</div>
+      <div class="cost"><b>$24</b> <i>/ month</i></div>
+      <p class="pitch">For teams that have users who will notice if it breaks.</p>
+      <ul>
+        <li><span class="dot"></span>10 projects</li>
+        <li><span class="dot"></span>1M events / month</li>
+        <li><span class="dot"></span>5 seats included</li>
+        <li><span class="dot"></span>Priority email support</li>
+      </ul>
+      <a class="go hot" href="#">Try free for 14 days</a>
+    </div>
+
+    <div class="tier">
+      <div class="tname">Scale</div>
+      <div class="cost"><b>$96</b> <i>/ month</i></div>
+      <p class="pitch">For companies with an incident channel.</p>
+      <ul>
+        <li><span class="dot"></span>Unlimited projects</li>
+        <li><span class="dot"></span>25M events / month</li>
+        <li><span class="dot"></span>SSO + audit log</li>
+        <li><span class="dot"></span>99.9% SLA</li>
+      </ul>
+      <a class="go" href="#">Book a call</a>
+    </div>
+  </div>
+
+  <p class="legal">USD, excluding tax. Upgrade or cancel any time.</p>
+</body>
+</html>
