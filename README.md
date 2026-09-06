@@ -189,3 +189,43 @@ safety, or anything multi-turn. It is four front-end briefs, one generation per
 model per task, at non-zero temperature. A model that wins here is good at these
 four things. Treat single entries as anecdotes and the aggregate as weak
 evidence — `/methodology` says the same thing to visitors.
+
+### Run your own prompt
+
+Open `/benchmark`, enter a prompt, and press **Bench** to run the checked
+model/effort pairs. Every pair starts checked. The page displays independent
+progress, errors, interactive artifacts at 1280 × 800, and measured latency and
+token counts. Ask for self-contained HTML for visual results; responses are
+saved verbatim, including any fences or malformed markup. Source and prompt
+are available through each result's shareable detail link. No quality score or
+cost estimate is invented.
+
+Run `pnpm db:migrate` to create `custom_benchmark_results`. Custom results do
+not enter the curated tasks, votes, or leaderboard and are untouched by seeding.
+Set `BENCHMARK_ACCESS_TOKEN` on the app server and give it only to people allowed
+to spend the server's provider credits. Enter it in the page's access-token
+field; it is held in component memory, not persisted to browser storage. Without
+this setting, execution returns HTTP 503. Set the relevant `ANTHROPIC_API_KEY`,
+`OPENAI_API_KEY`, or `GOOGLE_API_KEY` as for the CLI runner. Restart the app after
+changing environment configuration. Prompts and responses are stored in the
+database and readable by anyone possessing the random result URL; this is not a
+private document store.
+
+`db/seed/models.runtime.json` remains the model wiring source. The UI displays
+concrete `api_model` IDs because catalog labels and runtime examples differ.
+`benchmark_efforts` contains `{ id, label, parameters }` entries for each model.
+For Anthropic/OpenAI, parameters are provider request fields; for Google they
+are generation-config fields. Model and prompt fields remain server-controlled.
+Only configure settings supported by the concrete API model. The shipped
+Anthropic and OpenAI mappings expose provider-default effort, while Gemini
+2.5 Pro also offers explicit 1,024 and 8,192 thinking-token budgets, following
+[Google's thinking-budget documentation](https://ai.google.dev/gemini-api/docs/generate-content/thinking).
+These are provider-specific controls, not normalized low/high quality grades.
+The CLI runner retains its existing behavior and ignores `benchmark_efforts`.
+
+Execution uses at most three concurrent requests per app process, a two-minute
+provider timeout, a 20,000-character prompt limit, and bounded output-token
+requests. There are no automatic retries; a manual rerun incurs new calls.
+Multi-replica deployments have a separate concurrency limit in each process.
+
+Ticket-specific checks: `node --test --import ./tests/register.mjs tests/benchmark.test.mjs`.

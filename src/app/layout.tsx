@@ -35,6 +35,7 @@ export const viewport: Viewport = {
 };
 
 const NAV = [
+  { href: "/benchmark", label: "Run a prompt" },
   { href: "/tasks", label: "Benchmarks" },
   { href: "/arena", label: "Arena" },
   { href: "/leaderboard", label: "Leaderboard" },

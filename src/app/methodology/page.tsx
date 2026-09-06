@@ -93,7 +93,7 @@ export default async function MethodologyPage() {
         <Section n="05" title="What this benchmark is bad at" id="limits">
           <p>
             It does not measure reasoning, long-context recall, tool use, factual
-            accuracy, safety, or anything requiring more than one turn. It is four
+            accuracy, safety, or anything requiring more than one turn. The curated suite is four
             front-end briefs. A model that wins here is good at these four things
             and you should not extrapolate further than that.
           </p>
@@ -128,7 +128,24 @@ export default async function MethodologyPage() {
           </p>
         </Section>
 
-        <Section n="07" title="Adding a model or a benchmark">
+        <Section n="07" title="Custom prompt comparisons">
+          <p>
+            /benchmark sends your exact prompt to each selected model and effort
+            setting. Results are saved separately from the curated suite and do
+            not contribute votes or editorial scores to the leaderboard. Effort
+            controls are provider-specific; they are not equivalent across labs.
+          </p>
+          <p>
+            Compare the artifacts directly at a shared 1280 × 800 viewport.
+            Latency includes the provider request and response, not queue or storage
+            time. Token counts come from the provider, including thinking tokens
+            where reported. Missing counts remain unknown. These one-shot runs do
+            not establish a statistically reliable quality ranking. Raw responses
+            are preserved, including markdown fences or malformed HTML.
+          </p>
+        </Section>
+
+        <Section n="08" title="Adding a model or a benchmark">
           <p>
             Both live in{" "}
             <code className="rounded bg-ink-800 px-1.5 py-0.5 font-mono text-[12.5px] text-ink-200">

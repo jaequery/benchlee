@@ -24,8 +24,10 @@ export function ArtifactFrame({
   viewportH,
   className = "",
   interactive = false,
+  src,
 }: {
   publicId: string;
+  src?: string;
   title: string;
   viewportW: number;
   viewportH: number;
@@ -66,7 +68,7 @@ export function ArtifactFrame({
       )}
       {scale !== null && (
         <iframe
-          src={`/api/artifacts/${encodeURIComponent(publicId)}/raw`}
+          src={src ?? `/api/artifacts/${encodeURIComponent(publicId)}/raw`}
           title={title}
           loading="lazy"
           onLoad={() => setLoaded(true)}
