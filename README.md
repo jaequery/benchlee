@@ -2,14 +2,8 @@
 
 **Show your work.**
 
-The AI benchmarks you can actually see and judge for yourself.
-
-Every LLM leaderboard compresses a model's work into one number and asks you to
-trust the compression. For subjective work — layout, taste, restraint — that
-number throws away exactly the part you cared about. Benchlee stores what each
-model **actually built** and renders it live, side by side, in a sandboxed frame.
-Scores are still here; they just sit underneath the evidence instead of standing
-in for it.
+A read-only gallery of model outputs, with side-by-side comparisons and traceable
+editorial scores. Original artifacts stay unchanged; Demo fixtures stay labelled.
 
 ---
 
@@ -48,17 +42,19 @@ pnpm dev
 
 | Route | What it does |
 |---|---|
-| `/` | The pitch, plus a live three-way artifact comparison |
+| `/` | Featured outputs and benchmark gallery |
 | `/tasks` | Every benchmark, with a strip of each model's answer |
 | `/tasks/[slug]` | **The gallery** — every model's artifact for one brief, rendered side by side |
-| `/arena` | **Blind head-to-head.** Two artifacts, no labels. Vote, then the names appear |
+| `/arena` | Redirects to labelled comparison; voting is retired |
 | `/compare` | Labelled split view of any two entries, plus the numbers |
-| `/leaderboard` | Standings, ranked by blind win rate |
+| `/leaderboard` | Historical standings; editorial scores shown separately |
 | `/models`, `/models/[slug]` | Model directory and per-model portfolio |
 | `/a/[id]` | One artifact, full size and interactive, with its source |
 | `/methodology` | How it works and what it refuses to claim |
 | `/api/artifacts/[id]/raw` | Artifact source, served for the sandboxed iframe |
-| `/api/vote` | Records a head-to-head ballot |
+| `/api/vote`, `/api/benchmark` | HTTP 410; public submissions are retired |
+| `/benchmark` | Redirects to benchmarks |
+| `/benchmark/[id]` | Saved custom output, telemetry, prompt, and source |
 | `/api/health` | Compose healthcheck (fails if Postgres is down) |
 
 Dynamic OG images are generated per benchmark, model and artifact, so every
@@ -86,7 +82,7 @@ db/seed/catalog.json models, tasks, run telemetry, editorial scores and ballots
 db/seed/artifacts/   <task-slug>/<model-slug>.html — the artifacts themselves
 scripts/             migrate · seed · wait-for-db · run-benchmark
 src/lib/             db client, queries, types, brand constants, OG primitives
-src/components/      ArtifactFrame (the core), ArtifactCard, ArenaBoard, ui
+src/components/      ArtifactFrame (the core), ArtifactCard, BenchmarkResult, ui
 src/app/             routes
 ```
 
@@ -190,42 +186,27 @@ model per task, at non-zero temperature. A model that wins here is good at these
 four things. Treat single entries as anecdotes and the aggregate as weak
 evidence — `/methodology` says the same thing to visitors.
 
-### Run your own prompt
+### Saved custom results
 
-Open `/benchmark`, enter a prompt, and press **Bench** to run the checked
-model/effort pairs. Every pair starts checked. The page displays independent
-progress, errors, interactive artifacts at 1280 × 800, and measured latency and
-token counts. Ask for self-contained HTML for visual results; responses are
-saved verbatim, including any fences or malformed markup. Source and prompt
-are available through each result's shareable detail link. No quality score or
-cost estimate is invented.
+Previously saved custom results remain accessible at `/benchmark/[id]`, with
+original prompts, raw source, provider effort labels, latency, and token counts.
+They stay separate from curated standings and are untouched by seeding.
 
-Run `pnpm db:migrate` to create `custom_benchmark_results`. Custom results do
-not enter the curated tasks, votes, or leaderboard and are untouched by seeding.
-Set `BENCHMARK_ACCESS_TOKEN` on the app server and give it only to people allowed
-to spend the server's provider credits. Enter it in the page's access-token
-field; it is held in component memory, not persisted to browser storage. Without
-this setting, execution returns HTTP 503. Set the relevant `ANTHROPIC_API_KEY`,
-`OPENAI_API_KEY`, or `GOOGLE_API_KEY` as for the CLI runner. Restart the app after
-changing environment configuration. Prompts and responses are stored in the
-database and readable by anyone possessing the random result URL; this is not a
-private document store.
+The public site is read-only: `/benchmark` redirects to `/tasks`, and POST requests
+to `/api/benchmark` and `/api/vote` return HTTP 410 even when credentials are set.
+No provider call or database write is made. Use `pnpm bench:run` to publish curated
+results as an operator. Historical vote records remain available; voting is closed.
 
-`db/seed/models.runtime.json` remains the model wiring source. The UI displays
-concrete `api_model` IDs because catalog labels and runtime examples differ.
-`benchmark_efforts` contains `{ id, label, parameters }` entries for each model.
-For Anthropic/OpenAI, parameters are provider request fields; for Google they
-are generation-config fields. Model and prompt fields remain server-controlled.
-Only configure settings supported by the concrete API model. The shipped
-Anthropic and OpenAI mappings expose provider-default effort, while Gemini
-2.5 Pro also offers explicit 1,024 and 8,192 thinking-token budgets, following
-[Google's thinking-budget documentation](https://ai.google.dev/gemini-api/docs/generate-content/thinking).
-These are provider-specific controls, not normalized low/high quality grades.
-The CLI runner retains its existing behavior and ignores `benchmark_efforts`.
+Ticket acceptance checks: `node --test --import ./tests/register.mjs tests/readonly.test.mjs`.
 
-Execution uses at most three concurrent requests per app process, a two-minute
-provider timeout, a 20,000-character prompt limit, and bounded output-token
-requests. There are no automatic retries; a manual rerun incurs new calls.
-Multi-replica deployments have a separate concurrency limit in each process.
+For responsive acceptance, start an isolated preview (no database or provider calls):
 
-Ticket-specific checks: `node --test --import ./tests/register.mjs tests/benchmark.test.mjs`.
+```bash
+NODE_OPTIONS="--import ./tests/fixtures/readonly.mjs" pnpm exec next dev -p 3017
+# In another terminal, with Playwright and Chromium available:
+node tests/readonly-browser.mjs
+```
+
+Set `PLAYWRIGHT_MODULE` to the Playwright module path if installed externally,
+and `BENCHLEE_PREVIEW_URL` to override the preview URL. This fixture startup is
+for verification only; normal development and deployment still use Postgres.

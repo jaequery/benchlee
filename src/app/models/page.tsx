@@ -3,7 +3,7 @@ import Link from "next/link";
 import { entriesForModel, listModels, standings } from "@/lib/queries";
 import { ArtifactFrame } from "@/components/ArtifactFrame";
 import { getTask } from "@/lib/queries";
-import { SectionHeading } from "@/components/ui";
+import { ProvenanceBadge, SectionHeading } from "@/components/ui";
 import { formatPercent } from "@/lib/brand";
 
 export const dynamic = "force-dynamic";
@@ -29,8 +29,7 @@ export default async function ModelsPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
       <SectionHeading eyebrow="The field" title="Models">
-        Each one ran the same four briefs at the same viewport. Open a profile to
-        see all of its work in one place.
+        Explore each model’s benchmark results.
       </SectionHeading>
 
       <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -54,50 +53,40 @@ export default async function ModelsPage() {
 
               <div className="p-5">
                 <div className="flex items-center gap-3">
-                  <span
-                    className="grid size-9 shrink-0 place-items-center rounded-lg text-[12px] font-bold text-ink-950"
-                    style={{ backgroundColor: model.accent_hex }}
-                  >
-                    {model.badge}
-                  </span>
                   <div className="min-w-0">
-                    <div className="truncate text-[16px] font-semibold text-ink-100 group-hover:text-lime-benchlee">
+                    <div className="truncate text-base font-semibold text-ink-100 group-hover:text-lime-benchlee">
                       {model.name}
                     </div>
-                    <div className="truncate text-[12.5px] text-ink-400">
+                    <div className="truncate text-base text-ink-300">
                       {model.vendor}
                     </div>
                   </div>
                 </div>
 
-                {model.notes && (
-                  <p className="mt-3 text-[13.5px] leading-relaxed text-ink-400">
-                    {model.notes}
-                  </p>
-                )}
+                {first && <div className="mt-3"><ProvenanceBadge provenance={first.provenance} /></div>}
 
                 <dl className="mt-4 grid grid-cols-3 gap-3 border-t border-ink-800 pt-4">
                   <div>
-                    <dt className="text-[10.5px] uppercase tracking-[0.1em] text-ink-500">
-                      Win rate
+                    <dt className="text-base text-ink-300">
+                      Historical win rate
                     </dt>
-                    <dd className="tnum mt-0.5 text-[14px] text-ink-100">
+                    <dd className="tnum mt-0.5 text-base text-ink-100">
                       {formatPercent(stat?.win_rate ?? null)}
                     </dd>
                   </div>
                   <div>
-                    <dt className="text-[10.5px] uppercase tracking-[0.1em] text-ink-500">
+                    <dt className="text-base text-ink-300">
                       Rubric
                     </dt>
-                    <dd className="tnum mt-0.5 text-[14px] text-ink-100">
+                    <dd className="tnum mt-0.5 text-base text-ink-100">
                       {stat?.rubric_avg?.toFixed(2) ?? "—"}
                     </dd>
                   </div>
                   <div>
-                    <dt className="text-[10.5px] uppercase tracking-[0.1em] text-ink-500">
+                    <dt className="text-base text-ink-300">
                       Artifacts
                     </dt>
-                    <dd className="tnum mt-0.5 text-[14px] text-ink-100">
+                    <dd className="tnum mt-0.5 text-base text-ink-100">
                       {entries.length}
                     </dd>
                   </div>
