@@ -5,7 +5,7 @@
     "computed from real token counts.",
     "",
     "These ids are EXAMPLES. Set them to model ids your account actually has, and",
-    "check current pricing with your provider — the numbers below are placeholders",
+    "check current pricing with your provider \u2014 the numbers below are placeholders",
     "and will be wrong the moment prices change. A model with no entry here, or with",
     "no API key in the environment, is skipped rather than faked.",
     "",
@@ -16,20 +16,59 @@
     "api_model": "claude-opus-4-20250514",
     "usd_per_mtok_in": 15.0,
     "usd_per_mtok_out": 75.0,
-    "temperature": 1.0
+    "temperature": 1.0,
+    "benchmark_efforts": [
+      {
+        "id": "default",
+        "label": "Provider default",
+        "parameters": {}
+      }
+    ]
   },
   "gpt-5-2": {
     "provider": "openai",
     "api_model": "gpt-4o",
     "usd_per_mtok_in": 2.5,
     "usd_per_mtok_out": 10.0,
-    "temperature": 1.0
+    "temperature": 1.0,
+    "benchmark_efforts": [
+      {
+        "id": "default",
+        "label": "Provider default",
+        "parameters": {}
+      }
+    ]
   },
   "gemini-3-pro": {
     "provider": "google",
     "api_model": "gemini-2.5-pro",
     "usd_per_mtok_in": 1.25,
     "usd_per_mtok_out": 10.0,
-    "temperature": 1.0
+    "temperature": 1.0,
+    "benchmark_efforts": [
+      {
+        "id": "default",
+        "label": "Provider default",
+        "parameters": {}
+      },
+      {
+        "id": "budget-1024",
+        "label": "Thinking budget: 1,024 tokens",
+        "parameters": {
+          "thinkingConfig": {
+            "thinkingBudget": 1024
+          }
+        }
+      },
+      {
+        "id": "budget-8192",
+        "label": "Thinking budget: 8,192 tokens",
+        "parameters": {
+          "thinkingConfig": {
+            "thinkingBudget": 8192
+          }
+        }
+      }
+    ]
   }
 }

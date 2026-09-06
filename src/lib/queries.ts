@@ -335,3 +335,23 @@ export async function runRecord(runId: number): Promise<{ wins: number; losses: 
   );
   return { wins: Number(row?.wins ?? 0), losses: Number(row?.losses ?? 0) };
 }
+
+/** Custom prompt comparisons never enter curated standings or seeded runs. */
+export async function saveBenchmarkResult(result: import("./benchmark-types").BenchmarkResult): Promise<void> {
+  await query(
+    `INSERT INTO custom_benchmark_results
+      (id, prompt, option, content, latency_ms, input_tokens, output_tokens)
+     VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+    [result.id, result.prompt, JSON.stringify(result.option), result.content,
+      result.latencyMs, result.inputTokens, result.outputTokens],
+  );
+}
+
+export async function getBenchmarkResult(id: string): Promise<import("./benchmark-types").BenchmarkResult | null> {
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)) return null;
+  return queryOne<import("./benchmark-types").BenchmarkResult>(
+    `SELECT id, prompt, option, content, latency_ms AS "latencyMs",
+      input_tokens AS "inputTokens", output_tokens AS "outputTokens"
+     FROM custom_benchmark_results WHERE id = $1`, [id],
+  );
+}
