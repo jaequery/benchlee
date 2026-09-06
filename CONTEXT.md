@@ -38,8 +38,9 @@ Benchlee has exactly two evidence types and they are kept in separate columns
 everywhere, including the `model_standings` view. Averaging them produces a
 number that means neither thing, so don't.
 
-**Blind vote** — what a human picked in the Arena with the labels off. This is
-what the leaderboard is *ordered by*. Popularity signal, and labelled as one.
+**Blind vote** — a historical preference recorded with model labels hidden. The
+leaderboard remains ordered by historical win rate, with editorial scores breaking
+ties. Voting is now closed; historical votes are a popularity signal.
 
 **Editorial rubric** — 0–10 scores with written rationales, `judge = 'editorial'`.
 A stated opinion, not a measurement. Displayed *next to* win rate, never folded
@@ -63,17 +64,22 @@ Similarly, seeded ballots use a `seed:editorial:*` voter key and real visitor
 votes use `v:<uuid>`; `/leaderboard` reports community votes separately so the
 seeded shape is never passed off as turnout.
 
-## Blind vs labelled
+## Read-only browsing
 
-**Arena** (`/arena`) — blind. Model names are hidden until the ballot is cast.
-The reveal is both the honesty mechanism (removes brand bias) and the share
-moment.
+Benchlee is a read-only benchmark site. Visitors browse original artifacts,
+compare labelled outputs, and inspect run telemetry and editorial rationales.
+There are no public voting or custom-run submission controls.
 
-**Compare** (`/compare`) — labelled. You already know who made what and you want
-the split view and the numbers.
+**Arena** (`/arena`) — retired; redirects to labelled `/compare`, preserving
+benchmark and model query parameters. `/api/vote` returns HTTP 410 without writes.
 
-Both render the same artifacts through the same component. The difference is only
-what the UI is willing to tell you and when.
+**Compare** (`/compare`) — labelled side-by-side artifacts and run details.
+
+`/benchmark` redirects to `/tasks`; `/api/benchmark` returns HTTP 410 without
+provider calls or writes. Saved `/benchmark/[id]` results remain readable.
+Operators can still publish curated live runs using `scripts/run-benchmark.mjs`.
+Historical ballots remain stored; seeded turnout is never presented as community
+participation. Editorial scores and historical win rates remain separate.
 
 ## Viewport
 

@@ -61,8 +61,8 @@ export function ArtifactFrame({
     >
       {!loaded && (
         <div className="absolute inset-0 grid place-items-center">
-          <span className="text-[11px] uppercase tracking-[0.16em] text-ink-500">
-            rendering artifact…
+          <span className="text-base text-ink-300">
+            Loading output…
           </span>
         </div>
       )}

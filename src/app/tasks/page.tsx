@@ -3,7 +3,7 @@ import Link from "next/link";
 import { categoryLabel } from "@/lib/brand";
 import { entriesForTask, listTasks } from "@/lib/queries";
 import { ArtifactFrame } from "@/components/ArtifactFrame";
-import { SectionHeading } from "@/components/ui";
+import { ProvenanceBadge, SectionHeading } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -25,9 +25,7 @@ export default async function TasksPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
       <SectionHeading eyebrow="The suite" title="Benchmarks">
-        Each brief is written to produce something renderable, and to be losable
-        in a way a unit test would shrug at. Open one to see every model&apos;s
-        answer side by side.
+        Compare model outputs for each brief.
       </SectionHeading>
 
       <div className="mt-10 space-y-10">
@@ -38,10 +36,10 @@ export default async function TasksPage() {
           >
             <div className="flex flex-wrap items-start justify-between gap-4 border-b border-ink-800 p-5">
               <div className="max-w-2xl">
-                <span className="text-[11px] uppercase tracking-[0.14em] text-lime-benchlee">
+                <span className="text-base text-lime-benchlee">
                   {categoryLabel(task.category)}
                 </span>
-                <h2 className="mt-2 text-[22px] font-semibold tracking-[-0.02em] text-ink-100">
+                <h2 className="mt-2 text-2xl font-semibold tracking-[-0.02em] text-ink-100">
                   <Link
                     href={`/tasks/${task.slug}`}
                     className="hover:text-lime-benchlee"
@@ -49,19 +47,19 @@ export default async function TasksPage() {
                     {task.title}
                   </Link>
                 </h2>
-                <p className="mt-2 text-[14.5px] leading-relaxed text-ink-400">
+                <p className="mt-2 text-base leading-relaxed text-ink-300">
                   {task.summary}
                 </p>
               </div>
               <Link
                 href={`/tasks/${task.slug}`}
-                className="rounded-lg border border-ink-600 px-4 py-2 text-[13.5px] font-medium text-ink-200 transition-colors hover:border-lime-benchlee hover:text-lime-benchlee"
+                className="rounded-lg border border-ink-600 px-4 py-2 text-base font-semibold text-ink-200 transition-colors hover:border-lime-benchlee hover:text-lime-benchlee"
               >
                 Compare →
               </Link>
             </div>
 
-            <div className="grid grid-cols-2 gap-px bg-ink-800 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {entries.map((entry) => (
                 <Link
                   key={entry.run_id}
@@ -74,12 +72,9 @@ export default async function TasksPage() {
                     viewportW={task.viewport_w}
                     viewportH={task.viewport_h}
                   />
-                  <span className="absolute bottom-2 left-2 flex items-center gap-1.5 rounded-md bg-ink-950/85 px-2 py-1 text-[11px] font-medium text-ink-100 backdrop-blur-sm">
-                    <span
-                      className="size-2 rounded-full"
-                      style={{ backgroundColor: entry.model.accent_hex }}
-                    />
+                  <span className="flex flex-wrap items-center justify-between gap-2 px-3 py-3 text-base font-semibold text-ink-100">
                     {entry.model.name}
+                    <ProvenanceBadge provenance={entry.provenance} />
                   </span>
                 </Link>
               ))}

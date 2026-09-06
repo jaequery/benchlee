@@ -10,9 +10,9 @@ export const BRAND = {
   name: "Benchlee",
   wordmark: "benchlee",
   tagline: "Show your work.",
-  promise: "The LLM benchmark that shows you what the models actually built.",
+  promise: "Explore model outputs, side by side.",
   pitch:
-    "Every score on the internet asks you to trust a number. Benchlee hands you the artifact instead — the real HTML each model wrote, rendered live, side by side.",
+    "Benchmark outputs, side by side.",
   handle: "@benchlee",
 } as const;
 

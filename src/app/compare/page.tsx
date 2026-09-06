@@ -26,7 +26,7 @@ export default async function ComparePage({
 
   if (!task) {
     return (
-      <EmptyState message="No benchmarks found. Seed the database first." />
+      <EmptyState message="No benchmark results yet." />
     );
   }
 
@@ -52,7 +52,7 @@ export default async function ComparePage({
 
       {/* model pickers */}
       <div className="mt-8 grid gap-4 lg:grid-cols-2">
-        <Picker
+        <ModelSelector
           label="Left"
           task={task}
           entries={entries}
@@ -60,7 +60,7 @@ export default async function ComparePage({
           other={right}
           side="a"
         />
-        <Picker
+        <ModelSelector
           label="Right"
           task={task}
           entries={entries}
@@ -77,21 +77,18 @@ export default async function ComparePage({
       </div>
 
       {/* difference table */}
-      <section className="mt-12">
-        <SectionHeading title="What the numbers say">
-          Secondary evidence only. If it disagrees with your eyes, trust your
-          eyes — that is why the artifacts are above this table and not below it.
-        </SectionHeading>
+      <details className="mt-12">
+        <summary>Editorial scores &amp; run details</summary>
 
         <div className="mt-6 overflow-x-auto rounded-xl border border-ink-700 bg-ink-900">
-          <table className="w-full min-w-[600px] text-[13.5px]">
+          <table className="w-full min-w-[600px] text-base">
             <thead>
               <tr className="border-b border-ink-800 text-left">
-                <th className="px-4 py-3 font-medium text-ink-400">Dimension</th>
-                <th className="px-4 py-3 font-medium text-ink-200">
+                <th className="px-4 py-3 font-semibold text-ink-300">Dimension</th>
+                <th className="px-4 py-3 font-semibold text-ink-200">
                   {left.model.name}
                 </th>
-                <th className="px-4 py-3 font-medium text-ink-200">
+                <th className="px-4 py-3 font-semibold text-ink-200">
                   {right.model.name}
                 </th>
               </tr>
@@ -111,7 +108,7 @@ export default async function ComparePage({
                 );
               })}
               <tr className="bg-ink-850/50">
-                <td className="px-4 py-3 font-medium text-ink-200">Rubric average</td>
+                <td className="px-4 py-3 font-semibold text-ink-200">Editorial average</td>
                 <td className="tnum px-4 py-3 text-ink-100">
                   {rubricAverage(left.scores)?.toFixed(2) ?? "—"}
                 </td>
@@ -120,7 +117,7 @@ export default async function ComparePage({
                 </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-ink-300">Head-to-head record</td>
+                <td className="px-4 py-3 text-ink-300">Historical record</td>
                 <td className="tnum px-4 py-3 text-ink-200">
                   {left.wins}–{left.losses}
                 </td>
@@ -146,25 +143,20 @@ export default async function ComparePage({
             </tbody>
           </table>
         </div>
-      </section>
+      </details>
 
       <div className="mt-10 flex flex-wrap gap-3">
-        <Link
-          href={`/arena?task=${task.slug}&a=${left.model.slug}&b=${right.model.slug}`}
-          className="rounded-lg bg-lime-benchlee px-4 py-2.5 text-[14px] font-semibold text-ink-950 transition-colors hover:bg-lime-dim"
-        >
-          Vote on this pairing →
-        </Link>
+
         <Link
           href={`/tasks/${task.slug}`}
-          className="rounded-lg border border-ink-600 px-4 py-2.5 text-[14px] font-medium text-ink-200 transition-colors hover:border-ink-500"
+          className="rounded-lg border border-ink-600 px-4 py-2.5 text-base font-semibold text-ink-200 transition-colors hover:border-ink-500"
         >
-          All entries for this benchmark
+          All outputs
         </Link>
       </div>
 
       <nav className="mt-12 border-t border-ink-800 pt-6">
-        <div className="text-[11px] uppercase tracking-[0.14em] text-ink-500">
+        <div className="text-base text-ink-300">
           Switch benchmark
         </div>
         <div className="mt-3 flex flex-wrap gap-2">
@@ -172,7 +164,7 @@ export default async function ComparePage({
             <Link
               key={t.id}
               href={`/compare?task=${t.slug}`}
-              className={`rounded-lg border px-3.5 py-1.5 text-[13px] transition-colors ${
+              className={`rounded-lg border px-3.5 py-1.5 text-base transition-colors ${
                 t.slug === task.slug
                   ? "border-lime-benchlee bg-lime-benchlee/10 text-lime-benchlee"
                   : "border-ink-700 bg-ink-900 text-ink-300 hover:border-ink-500"
@@ -187,7 +179,7 @@ export default async function ComparePage({
   );
 }
 
-function Picker({
+function ModelSelector({
   label,
   task,
   entries,
@@ -203,10 +195,8 @@ function Picker({
   side: "a" | "b";
 }) {
   return (
-    <div className="rounded-xl border border-ink-700 bg-ink-900 p-4">
-      <div className="text-[11px] uppercase tracking-[0.14em] text-ink-500">
-        {label}
-      </div>
+    <details className="rounded-lg border border-ink-700 p-4">
+      <summary>{label}: {selected.model.name}</summary>
       <div className="mt-3 flex flex-wrap gap-2">
         {entries.map((entry) => {
           const active = entry.run_id === selected.run_id;
@@ -218,29 +208,25 @@ function Picker({
             <Link
               key={entry.run_id}
               href={href}
-              className={`flex items-center gap-2 rounded-lg border px-3 py-1.5 text-[12.5px] transition-colors ${
+              className={`flex items-center gap-2 rounded-lg border px-3 py-1.5 text-base transition-colors ${
                 active
                   ? "border-lime-benchlee bg-lime-benchlee/10 text-lime-benchlee"
                   : "border-ink-700 text-ink-300 hover:border-ink-500"
               }`}
             >
-              <span
-                className="size-2 rounded-full"
-                style={{ backgroundColor: entry.model.accent_hex }}
-              />
               {entry.model.name}
             </Link>
           );
         })}
       </div>
-    </div>
+    </details>
   );
 }
 
 function Panel({ entry, task }: { entry: Entry; task: Task }) {
   return (
     <article className="overflow-hidden rounded-xl border border-ink-700 bg-ink-900">
-      <header className="flex items-center justify-between gap-3 border-b border-ink-800 px-4 py-3">
+      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-ink-800 px-4 py-3">
         <ModelChip model={entry.model} href={`/models/${entry.model.slug}`} />
         <ProvenanceBadge provenance={entry.provenance} />
       </header>
@@ -253,9 +239,9 @@ function Panel({ entry, task }: { entry: Entry; task: Task }) {
         className="border-b border-ink-800"
       />
 
-      <div className="grid grid-cols-4 gap-3 px-4 py-4">
-        <Stat label="Rubric" value={rubricAverage(entry.scores)?.toFixed(1) ?? "—"} />
-        <Stat label="H2H" value={`${entry.wins}–${entry.losses}`} />
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 px-4 py-4">
+        <Stat label="Editorial" value={rubricAverage(entry.scores)?.toFixed(1) ?? "—"} />
+        <Stat label="Historical record" value={`${entry.wins}–${entry.losses}`} />
         <Stat label="Latency" value={formatMs(entry.latency_ms)} />
         <Stat label="Cost" value={formatCost(entry.cost_usd)} />
       </div>
@@ -263,9 +249,9 @@ function Panel({ entry, task }: { entry: Entry; task: Task }) {
       <div className="border-t border-ink-800 px-4 py-3">
         <Link
           href={`/a/${entry.artifact_public_id}`}
-          className="text-[13px] font-medium text-lime-benchlee hover:underline"
+          className="text-base font-semibold text-lime-benchlee hover:underline"
         >
-          Open full size & read the source →
+          Inspect output →
         </Link>
       </div>
     </article>
@@ -284,12 +270,12 @@ function ScoreCell({
   return (
     <td className="px-4 py-3 align-top">
       <span
-        className={`tnum text-[14px] ${lead ? "text-lime-benchlee" : "text-ink-200"}`}
+        className={`tnum text-base ${lead ? "text-lime-benchlee" : "text-ink-200"}`}
       >
         {value === null ? "—" : value.toFixed(1)}
       </span>
       {rationale && (
-        <span className="mt-1 block max-w-md text-[12.5px] leading-relaxed text-ink-500">
+        <span className="mt-1 block max-w-md text-base leading-relaxed text-ink-300">
           {rationale}
         </span>
       )}
@@ -300,11 +286,11 @@ function ScoreCell({
 function EmptyState({ message }: { message: string }) {
   return (
     <div className="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
-      <h1 className="text-[26px] font-semibold text-ink-100">Nothing to compare</h1>
-      <p className="mt-3 text-[15px] text-ink-400">{message}</p>
+      <h1 className="text-2xl font-semibold text-ink-100">Nothing to compare</h1>
+      <p className="mt-3 text-base text-ink-300">{message}</p>
       <Link
         href="/tasks"
-        className="mt-6 inline-block rounded-lg border border-ink-600 px-4 py-2 text-[14px] text-ink-200 hover:border-lime-benchlee hover:text-lime-benchlee"
+        className="mt-6 inline-block rounded-lg border border-ink-600 px-4 py-2 text-base text-ink-200 hover:border-lime-benchlee hover:text-lime-benchlee"
       >
         Browse benchmarks
       </Link>
